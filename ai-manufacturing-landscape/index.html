@@ -124,6 +124,45 @@ button, a, input, select, [tabindex="0"] {
   font-size: var(--ds-font-size-sm);
   margin: 0;
 }
+.entry-mode-links {
+  margin-top: var(--ds-spacing-xl);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-sm);
+}
+.text-link {
+  background: none;
+  border: none;
+  color: var(--ds-color-red-400);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  min-height: var(--ds-touch-min);
+}
+.value-disclaimer {
+  font-size: var(--ds-font-size-xs);
+  color: var(--ds-text-muted);
+  font-style: italic;
+  margin-top: var(--ds-spacing-xs);
+}
+.empty-cell-finding {
+  background: var(--ds-surface-raised);
+  border: 1px dashed var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-spacing-lg);
+  margin-top: var(--ds-spacing-md);
+}
+.maturity-wave {
+  margin-bottom: var(--ds-spacing-lg);
+  padding: var(--ds-spacing-md);
+  background: var(--ds-surface-raised);
+  border-radius: var(--ds-radius-md);
+}
+.maturity-wave h3 { margin: 0 0 var(--ds-spacing-xs); }
+.wave-desc { font-size: var(--ds-font-size-sm); color: var(--ds-text-secondary); margin: 0 0 var(--ds-spacing-md); }
+.wave-case { margin-bottom: var(--ds-spacing-sm); }
+.wave-meta { display: block; font-size: var(--ds-font-size-xs); color: var(--ds-text-muted); margin-top: 2px; }
+.wave-empty { color: var(--ds-text-muted); font-style: italic; }
 
 /* Shell */
 .shell { display: flex; flex: 1; min-height: 0; }
@@ -197,6 +236,7 @@ button, a, input, select, [tabindex="0"] {
 .tech-generative { background: var(--ds-color-red-200); }
 .tech-vision { background: var(--ds-color-red-300); color: var(--ds-surface); }
 .tech-physics { background: var(--ds-color-red-500); color: var(--ds-surface); }
+.tech-all { background: var(--ds-surface-muted); }
 
 .agentic-band {
   padding: var(--ds-spacing-sm) var(--ds-spacing-md);
@@ -531,17 +571,20 @@ button, a, input, select, [tabindex="0"] {
 }
 .prioritisation-chart .mid-v { top: 0; bottom: 0; left: 50%; width: 1px; }
 .prioritisation-chart .mid-h { left: 0; right: 0; top: 50%; height: 1px; }
-.prio-dot {
+.prioritisation-chart .x-axis-line {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--ds-color-red-400);
-  border: 1px solid var(--ds-surface);
-  transform: translate(-50%, 50%);
-  cursor: pointer;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--ds-text-primary);
 }
-.prio-dot:hover { width: 14px; height: 14px; background: var(--ds-color-red-500); }
+.prio-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--ds-surface); transform: translate(-50%, 50%); cursor: pointer; }
+.prio-dot.tech-predictive { background: var(--ds-color-red-100); border-color: var(--ds-color-red-400); }
+.prio-dot.tech-generative { background: var(--ds-color-red-200); border-color: var(--ds-color-red-400); }
+.prio-dot.tech-vision { background: var(--ds-color-red-300); border-color: var(--ds-color-red-500); }
+.prio-dot.tech-physics { background: var(--ds-color-red-500); border-color: var(--ds-color-red-600); }
+.prio-dot:hover { width: 14px; height: 14px; }
 .prio-legend { font-size: var(--ds-font-size-xs); color: var(--ds-text-muted); }
 
 /* Maturity horizon */
@@ -694,7 +737,7 @@ const DATA = {
   },
   techLabels: {
     predictive: "Predictive AI", generative: "Generative AI",
-    vision: "Vision AI", physics: "Physics AI"
+    vision: "Vision AI", physics: "Physics AI & Robotics"
   },
   driverLabels: {
     revenue: "Revenue", cost: "Cost", capital: "Capital",
@@ -704,7 +747,12 @@ const DATA = {
     emerging: "Emerging", proving: "Proving", scaling: "Scaling", proven: "Proven"
   },
   autonomyLabels: {
-    1: "Assist", 2: "Advise", 3: "Act with oversight", 4: "Autonomous"
+    1: "L1 Inform", 2: "L2 Recommend", 3: "L3 Supervised act", 4: "L4 Autonomous"
+  },
+  maturityWaves: {
+    deploy: { label: "Deploy now", maturities: ["proven"] },
+    scale: { label: "Scale 12-24 mo", maturities: ["scaling"] },
+    prove: { label: "Prove and watch", maturities: ["proving", "emerging"] }
   },
   enablers: [
     { name: "Sustainability & EHS", desc: "Energy, emissions, water, and safety programmes that cut across all stages." },
@@ -797,8 +845,18 @@ function getCasesForCell(stage, tech) {
 }
 
 function parseRoute() {
-  const hash = location.hash.slice(1) || "/";
-  const parts = hash.split("/").filter(Boolean);
+  const raw = location.hash.slice(1) || "/";
+  const qIdx = raw.indexOf("?");
+  const pathPart = qIdx >= 0 ? raw.slice(0, qIdx) : raw;
+  const queryPart = qIdx >= 0 ? raw.slice(qIdx + 1) : "";
+  const params = new URLSearchParams(queryPart);
+  state.filters.driver = params.get("driver") || "";
+  state.filters.autonomy = params.get("autonomy") || "";
+  state.filters.maturity = params.get("maturity") || "";
+  state.filters.robotics = params.get("robotics") === "1";
+  state.filters.search = params.get("q") || "";
+
+  const parts = pathPart.split("/").filter(Boolean);
   if (!parts.length || parts[0] === "") return { view: "entry" };
   if (parts[0] === "landscape") return { view: "landscape" };
   if (parts[0] === "stage" && parts[1]) return { view: "stage", stage: parts[1] };
@@ -813,19 +871,33 @@ function parseRoute() {
   return { view: "entry" };
 }
 
+function filterQuery() {
+  const p = new URLSearchParams();
+  if (state.filters.driver) p.set("driver", state.filters.driver);
+  if (state.filters.autonomy) p.set("autonomy", state.filters.autonomy);
+  if (state.filters.maturity) p.set("maturity", state.filters.maturity);
+  if (state.filters.robotics) p.set("robotics", "1");
+  if (state.filters.search) p.set("q", state.filters.search);
+  const s = p.toString();
+  return s ? "?" + s : "";
+}
+
 function navigate(path) {
-  location.hash = path;
+  const q = filterQuery();
+  location.hash = path + q;
 }
 
 function renderEntry() {
   return '<div class="entry-screen">' +
     '<h1>AI x Manufacturing Landscape</h1>' +
-    '<p class="subtitle">A MECE framework mapping 47 AI use cases across the manufacturing value chain and technology maturity ladder.</p>' +
+    '<p class="subtitle">A MECE framework mapping 47 AI use cases across the manufacturing value chain and the dimensionality ladder of AI technology.</p>' +
     '<div class="doors">' +
-    '<button class="door" data-nav="#/story/1" type="button"><h2>Guided Story</h2><p>12-step narrative from why-now through value concentration, prerequisites, and deep dives.</p></button>' +
-    '<button class="door" data-nav="#/landscape" type="button"><h2>Free Explore</h2><p>Navigate the 8x4 landscape grid, filter by driver, autonomy, maturity, and robotics.</p></button>' +
-    '<button class="door" data-nav="#/prioritisation" type="button"><h2>Prioritise &amp; Plan</h2><p>Plot use cases on impact vs feasibility, review maturity horizon, and build a shortlist.</p></button>' +
-    '</div></div>';
+    '<button class="door" data-nav="#/stage/plan" type="button"><h2>Start with your value chain</h2><p>For a COO: walk Plan through Serve and see where AI value pools concentrate across operations.</p></button>' +
+    '<button class="door" data-nav="#/tech/predictive" type="button"><h2>Start with the technology</h2><p>For a CTO: climb Predictive to Physics AI and see how each rung applies across the chain.</p></button>' +
+    '<button class="door" data-nav="#/landscape" type="button"><h2>See the whole landscape</h2><p>32-cell grid with both axes visible. Empty cells are findings, not gaps.</p></button>' +
+    '</div>' +
+    '<p class="entry-mode-links"><button type="button" class="text-link" data-nav="#/story/1">Guided story</button> (12 steps) or <button type="button" class="text-link" data-nav="#/landscape">free explore</button> with search and filters.</p>' +
+    '</div>';
 }
 
 function renderToolbar(route) {
@@ -851,6 +923,7 @@ function renderToolbar(route) {
   h += '<button type="button" class="chip" data-nav="#/maturity">Maturity</button>';
   h += '<button type="button" class="chip" data-nav="#/autonomy">Autonomy</button>';
   h += '<button type="button" class="chip" data-nav="#/shortlist">Shortlist<span class="shortlist-badge">' + state.shortlist.length + '</span></button>';
+  h += '<button type="button" class="chip" data-nav="#/story/1">Guided story</button>';
   h += '<button type="button" class="chip" data-nav="#/">Home</button>';
   h += '</div>';
   return h;
@@ -885,7 +958,7 @@ function renderBreadcrumb(route) {
 
   let h = '<nav class="breadcrumb" aria-label="Breadcrumb">';
   crumbs.forEach((c, i) => {
-    if (i > 0) h += '<span class="sep">/</span>';
+    if (i > 0) h += '<span class="sep" aria-hidden="true">&#8250;</span>';
     if (i === crumbs.length - 1) h += '<span>' + escapeHtml(c.label) + '</span>';
     else h += '<a data-nav="' + c.path + '">' + escapeHtml(c.label) + '</a>';
   });
@@ -897,6 +970,7 @@ function renderLeftRail(route) {
   const active = route.stage || "";
   let h = '<nav class="left-rail" aria-label="Value chain stages">';
   h += '<div class="left-rail-label">Value Chain</div>';
+  h += '<button type="button" class="stage-btn' + (route.view === "landscape" ? ' active' : '') + '" data-stage="" data-stage-idx="-1" aria-label="All stages">All</button>';
   DATA.stages.forEach((s, i) => {
     h += '<button type="button" class="stage-btn' + (active === s ? ' active' : '') + '" data-stage="' + s + '" data-stage-idx="' + i + '" aria-label="' + DATA.stageLabels[s] + '">' + DATA.stageLabels[s] + '</button>';
   });
@@ -907,6 +981,7 @@ function renderLeftRail(route) {
 function renderTopRail(route) {
   const active = route.tech || "";
   let h = '<div class="top-rail"><div class="top-rail-row" role="tablist" aria-label="Technology rungs">';
+  h += '<button type="button" class="tech-btn tech-all' + (route.view === "landscape" ? ' active' : '') + '" data-tech="" data-tech-idx="-1" role="tab">All</button>';
   DATA.tech.forEach((t, i) => {
     h += '<button type="button" class="tech-btn tech-' + t + (active === t ? ' active' : '') + '" data-tech="' + t + '" data-tech-idx="' + i + '" role="tab">' + DATA.techLabels[t] + '</button>';
   });
@@ -956,7 +1031,7 @@ function renderEnablers() {
 }
 
 function renderLandscape() {
-  let h = '<div class="rule-banner"><strong>Highest-rung rule:</strong> Classify each use case at the highest technology rung it genuinely requires. If a solution uses vision models on top of physics simulation, place it at Physics AI — not Vision AI.</div>';
+  let h = '<div class="rule-banner"><strong>Highest-rung rule:</strong> A use case is classified by the highest rung it requires. A vision model that predicts defects is Vision AI, not Predictive — 2-D beats numbers. If a solution combines vision with physics simulation or closed-loop robot control, it belongs at Physics AI &amp; Robotics.</div>';
   h += '<div class="landscape-grid">';
   DATA.stages.forEach(stage => {
     DATA.tech.forEach(tech => {
@@ -998,10 +1073,22 @@ function renderTechLens(tech) {
 function renderCellView(stage, tech) {
   const cases = getCasesForCell(stage, tech);
   let h = '<div class="lens-header"><h2>' + DATA.stageLabels[stage] + ' x ' + DATA.techLabels[tech] + '</h2>';
-  h += '<p>' + cases.length + ' use case' + (cases.length !== 1 ? 's' : '') + ' in this cell.</p></div>';
-  h += '<div class="case-list">';
-  cases.forEach(uc => h += renderCaseCard(uc));
-  h += '</div>';
+  if (cases.length) {
+    h += '<p>' + cases.length + ' use case' + (cases.length !== 1 ? 's' : '') + ' in this cell.</p></div>';
+    h += '<div class="case-list">';
+    cases.forEach(uc => h += renderCaseCard(uc));
+    h += '</div>';
+  } else {
+    h += '<div class="empty-cell-finding"><p><strong>Deliberate finding:</strong> This intersection is empty. ';
+    if (stage === 'plan' && tech === 'vision') {
+      h += 'Planning decisions operate on forecasts and constraints (numbers and language), not 2-D imagery — vision enters downstream at Make and Quality.';
+    } else if (stage === 'source' && tech === 'physics') {
+      h += 'Sourcing is transactional and document-driven; physics simulation and robotics deploy where product is designed and made, not where contracts are negotiated.';
+    } else {
+      h += 'No validated use cases met the highest-rung rule for this stage-technology pairing in our cross-industry scan.';
+    }
+    h += '</p></div></div>';
+  }
   return h;
 }
 
@@ -1021,7 +1108,8 @@ function renderDetail(id) {
   h += '<div class="impact-bar" aria-hidden="true">';
   for (let i = 1; i <= 5; i++) h += '<div class="impact-seg' + (i <= uc.impact ? ' on' : '') + '"></div>';
   h += '</div></div>';
-  h += '<div class="detail-section"><h3>Value range</h3><p>' + escapeHtml(uc.valueRange) + '</p></div>';
+  h += '<div class="detail-section"><h3>Value range</h3><p>' + escapeHtml(uc.valueRange) + '</p>';
+  h += '<p class="value-disclaimer">Indicative ranges only — validate against your baseline before building a business case.</p></div>';
   h += '<div class="detail-section"><h3>Prerequisites</h3><ul>';
   uc.prerequisites.forEach(p => h += '<li>' + escapeHtml(p) + '</li>');
   h += '</ul></div>';
@@ -1029,8 +1117,8 @@ function renderDetail(id) {
   h += '<div class="detail-section"><h3>Exemplar</h3><p>' + escapeHtml(uc.exemplar) + '</p></div>';
   h += '<div class="detail-actions">';
   h += '<button type="button" class="primary" id="btn-shortlist">' + (inList ? 'Remove from shortlist' : 'Add to shortlist') + '</button>';
-  h += '<a data-nav="#/stage/' + uc.stage + '">Pivot: ' + DATA.stageLabels[uc.stage] + ' stage</a>';
-  h += '<a data-nav="#/tech/' + uc.tech + '">Pivot: ' + DATA.techLabels[uc.tech] + '</a>';
+  h += '<a data-nav="#/stage/' + uc.stage + '">Other use cases in ' + DATA.stageLabels[uc.stage] + '</a>';
+  h += '<a data-nav="#/tech/' + uc.tech + '">Other use cases in ' + DATA.techLabels[uc.tech] + '</a>';
   h += '<a data-nav="#/cell/' + uc.stage + '/' + uc.tech + '">Pivot: Cell view</a>';
   h += '<a data-nav="#/prioritisation">Pivot: Prioritisation</a>';
   h += '</div></div>';
@@ -1044,7 +1132,7 @@ function renderPrioritisation() {
   h += '<div class="prioritisation-chart" role="img" aria-label="Impact vs feasibility scatter plot">';
   h += '<div class="y-labels"><span>High impact</span><span>Low impact</span></div>';
   h += '<div class="x-labels"><span>Low feasibility</span><span>High feasibility</span></div>';
-  h += '<div class="mid-v"></div><div class="mid-h"></div>';
+  h += '<div class="mid-v"></div><div class="mid-h"></div><div class="x-axis-line" aria-hidden="true"></div>';
   h += '<div class="quadrant-labels">';
   h += '<span class="quad-label tl">Invest &amp; build</span>';
   h += '<span class="quad-label tr">Quick wins</span>';
@@ -1054,7 +1142,7 @@ function renderPrioritisation() {
   cases.forEach(uc => {
     const x = ((uc.feasibility - 1) / 4) * 100;
     const y = ((uc.impact - 1) / 4) * 100;
-    h += '<div class="prio-dot" style="left:' + x + '%;bottom:' + y + '%" data-case="' + uc.id + '" title="' + escapeHtml(uc.name) + '"></div>';
+    h += '<div class="prio-dot tech-' + uc.tech + '" style="left:' + x + '%;bottom:' + y + '%" data-case="' + uc.id + '" title="' + escapeHtml(uc.name) + '"></div>';
   });
   h += '</div>';
   h += '<p class="prio-legend">' + cases.length + ' use cases plotted. Click a dot for details.</p></div>';
@@ -1063,23 +1151,28 @@ function renderPrioritisation() {
 
 function renderMaturity() {
   const cases = filteredCases(DATA.useCases);
-  let h = '<h2>Maturity Horizon</h2><p style="color:var(--ds-text-secondary);font-size:var(--ds-font-size-sm)">Use cases by value chain stage and maturity band. Shape encodes maturity level.</p>';
-  h += '<div class="maturity-horizon"><table class="maturity-table"><thead><tr><th>Stage</th>';
-  DATA.maturity.forEach(m => {
-    h += '<th><div class="maturity-col-header">' + maturityBar(m) + '<span>' + DATA.maturityLabels[m] + '</span></div></th>';
+  const waves = [
+    { key: "deploy", desc: "Proven at scale — deploy with standard governance." },
+    { key: "scale", desc: "Scaling now — expect 12-24 month rollout to full value." },
+    { key: "prove", desc: "Proving or emerging — watch, pilot, and validate prerequisites." }
+  ];
+  let h = '<h2>Maturity Horizon</h2><p style="color:var(--ds-text-secondary);font-size:var(--ds-font-size-sm)">Three deployment waves. Maturity encoded as shape, not colour.</p>';
+  waves.forEach(w => {
+    const wave = DATA.maturityWaves[w.key];
+    const waveCases = cases.filter(uc => wave.maturities.includes(uc.maturity));
+    h += '<div class="maturity-wave"><h3>' + wave.label + '</h3><p class="wave-desc">' + w.desc + '</p>';
+    if (!waveCases.length) {
+      h += '<p class="wave-empty">No use cases in current filter set.</p>';
+    } else {
+      h += '<div class="wave-cases">';
+      waveCases.forEach(uc => {
+        h += '<div class="wave-case"><a data-nav="#/case/' + uc.id + '">' + escapeHtml(uc.name) + '</a>';
+        h += '<span class="wave-meta">' + DATA.stageLabels[uc.stage] + ' &middot; ' + maturityBar(uc.maturity) + ' ' + DATA.maturityLabels[uc.maturity] + '</span></div>';
+      });
+      h += '</div>';
+    }
+    h += '</div>';
   });
-  h += '</tr></thead><tbody>';
-  DATA.stages.forEach(stage => {
-    h += '<tr><th>' + DATA.stageLabels[stage] + '</th>';
-    DATA.maturity.forEach(mat => {
-      const cell = cases.filter(uc => uc.stage === stage && uc.maturity === mat);
-      h += '<td>';
-      cell.forEach(uc => h += '<div><a data-nav="#/case/' + uc.id + '" style="cursor:pointer;color:var(--ds-color-red-400)">' + escapeHtml(uc.name) + '</a></div>');
-      h += '</td>';
-    });
-    h += '</tr>';
-  });
-  h += '</tbody></table></div>';
   return h;
 }
 
@@ -1134,7 +1227,7 @@ const STORY = [
   { title: "Deep dive: Make x Vision", body: "<p>In-line surface inspection on an automotive body panel line demonstrates Vision AI at production cadence: CNNs classify defects at 60 jobs/hour with automatic reject routing.</p><p>Prerequisites include controlled lighting, 500+ labelled images per defect class, and integrated line-stop mechanisms. Value: 30-60% reduction in downstream quality escapes.</p>", action: "#/case/make-vision-01" },
   { title: "Deep dive: Plan x Predictive", body: "<p>Multi-echelon demand forecasting fuses POS, distributor, weather, and macro signals for S&OP. Hierarchical reconciliation rolls plant forecasts to SKU and family consistently.</p><p>Proven at global CPG scale: 2-5% revenue uplift from fill-rate improvement and 5-15% inventory reduction — but requires 24+ months of clean shipment history.</p>", action: "#/case/plan-predictive-01" },
   { title: "Deep dive: Make x Physics (Robotics)", body: "<p>Adaptive robotic welding adjusts torch path from 3-D seam profile sensing in real time. This is Physics AI with robotics — not a separate category.</p><p>Autonomy tier 4 with scaling maturity. Filter by \"Robotics\" to surface all Physics AI use cases involving physical actuation: welding, cobots, AM digital twins, AMR fleets, inspection robots, and drone surveys.</p>", action: "#/case/make-physics-01" },
-  { title: "Autonomy ladder", body: "<p>Autonomy spans four tiers: Assist, Advise, Act with oversight, and Autonomous. Agentic behaviour is earned through data quality, guardrails, and operational trust — not purchased as a product SKU.</p><p>Use cases at tier 3-4 (e.g. predictive maintenance auto-work-orders, label verification gates, AMR fleets) require stronger governance and override mechanisms.</p>", action: "#/autonomy" },
+  { title: "Autonomy ladder", body: "<p>Autonomy spans four tiers: L1 Inform, L2 Recommend, L3 Supervised act, and L4 Autonomous. Agentic behaviour is earned through data quality, guardrails, and operational trust — not purchased as a product SKU.</p><p>Use cases at L3-L4 (e.g. predictive maintenance auto-work-orders, label verification gates, AMR fleets) require stronger governance and override mechanisms.</p>", action: "#/autonomy" },
   { title: "Value concentration + prerequisites", body: "<p>High-impact clusters concentrate in Make (predictive maintenance, process optimisation, vision inspection) and Quality (dimensional inspection, X-ray classification). Physics AI cells carry robotics flagships but lower feasibility scores.</p><p>Prerequisites repeat: clean historian data, IT/OT integration, labelled training corpora, and governance gates. Build the enabler foundation before scaling autonomy tiers.</p><p>Use prioritisation and shortlist views to assemble your portfolio.</p>", action: "#/prioritisation" }
 ];
 
@@ -1201,12 +1294,26 @@ function bindEvents(root) {
     el.addEventListener("click", () => navigate(el.getAttribute("data-nav").replace("#", "")));
   });
   root.querySelectorAll(".stage-btn").forEach(el => {
-    el.addEventListener("click", () => navigate("/stage/" + el.getAttribute("data-stage")));
+    el.addEventListener("click", () => {
+      const stage = el.getAttribute("data-stage");
+      const route = parseRoute();
+      const tech = route.tech || null;
+      if (!stage) navigate("/landscape");
+      else if (tech) navigate("/cell/" + stage + "/" + tech);
+      else navigate("/stage/" + stage);
+    });
   });
   root.querySelectorAll(".tech-btn").forEach(el => {
-    el.addEventListener("click", () => navigate("/tech/" + el.getAttribute("data-tech")));
+    el.addEventListener("click", () => {
+      const tech = el.getAttribute("data-tech");
+      const route = parseRoute();
+      const stage = route.stage || null;
+      if (!tech) navigate("/landscape");
+      else if (stage) navigate("/cell/" + stage + "/" + tech);
+      else navigate("/tech/" + tech);
+    });
   });
-  root.querySelectorAll(".grid-cell:not(.empty)").forEach(el => {
+  root.querySelectorAll(".grid-cell").forEach(el => {
     const parts = el.getAttribute("data-cell").split("/");
     const go = () => navigate("/cell/" + parts[0] + "/" + parts[1]);
     el.addEventListener("click", go);
@@ -1221,15 +1328,15 @@ function bindEvents(root) {
     el.addEventListener("click", () => navigate("/case/" + el.getAttribute("data-case")));
   });
   const search = root.querySelector("#f-search");
-  if (search) search.addEventListener("input", e => { state.filters.search = e.target.value; render(); });
+  if (search) search.addEventListener("input", e => { state.filters.search = e.target.value; syncFiltersHash(); });
   const driver = root.querySelector("#f-driver");
-  if (driver) driver.addEventListener("change", e => { state.filters.driver = e.target.value; render(); });
+  if (driver) driver.addEventListener("change", e => { state.filters.driver = e.target.value; syncFiltersHash(); });
   const autonomy = root.querySelector("#f-autonomy");
-  if (autonomy) autonomy.addEventListener("change", e => { state.filters.autonomy = e.target.value; render(); });
+  if (autonomy) autonomy.addEventListener("change", e => { state.filters.autonomy = e.target.value; syncFiltersHash(); });
   const maturity = root.querySelector("#f-maturity");
-  if (maturity) maturity.addEventListener("change", e => { state.filters.maturity = e.target.value; render(); });
+  if (maturity) maturity.addEventListener("change", e => { state.filters.maturity = e.target.value; syncFiltersHash(); });
   const robotics = root.querySelector("#f-robotics");
-  if (robotics) robotics.addEventListener("click", () => { state.filters.robotics = !state.filters.robotics; render(); });
+  if (robotics) robotics.addEventListener("click", () => { state.filters.robotics = !state.filters.robotics; syncFiltersHash(); });
   const btnShortlist = root.querySelector("#btn-shortlist");
   if (btnShortlist) {
     btnShortlist.addEventListener("click", () => {
@@ -1262,32 +1369,43 @@ function bindEvents(root) {
   });
 }
 
+function syncFiltersHash() {
+  const path = location.hash.slice(1).split("?")[0] || "/";
+  location.hash = path + filterQuery();
+}
+
 document.addEventListener("keydown", e => {
   const route = parseRoute();
   if (route.view === "entry") return;
   const tag = document.activeElement && document.activeElement.tagName;
   if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
 
-  let stageIdx = DATA.stages.indexOf(route.stage);
-  let techIdx = DATA.tech.indexOf(route.tech);
-  if (route.view === "landscape" && stageIdx < 0) stageIdx = 0;
-  if (route.view === "landscape" && techIdx < 0) techIdx = 0;
+  let stageIdx = route.stage ? DATA.stages.indexOf(route.stage) : -1;
+  let techIdx = route.tech ? DATA.tech.indexOf(route.tech) : -1;
 
   if (e.key === "ArrowLeft" && stageIdx > 0) {
     e.preventDefault();
-    navigate("/stage/" + DATA.stages[stageIdx - 1]);
+    const tech = route.tech || null;
+    if (tech) navigate("/cell/" + DATA.stages[stageIdx - 1] + "/" + tech);
+    else navigate("/stage/" + DATA.stages[stageIdx - 1]);
   }
   if (e.key === "ArrowRight" && stageIdx >= 0 && stageIdx < DATA.stages.length - 1) {
     e.preventDefault();
-    navigate("/stage/" + DATA.stages[stageIdx + 1]);
+    const tech = route.tech || null;
+    if (tech) navigate("/cell/" + DATA.stages[stageIdx + 1] + "/" + tech);
+    else navigate("/stage/" + DATA.stages[stageIdx + 1]);
   }
   if (e.key === "ArrowUp" && techIdx > 0) {
     e.preventDefault();
-    navigate("/tech/" + DATA.tech[techIdx - 1]);
+    const stage = route.stage || null;
+    if (stage) navigate("/cell/" + stage + "/" + DATA.tech[techIdx - 1]);
+    else navigate("/tech/" + DATA.tech[techIdx - 1]);
   }
   if (e.key === "ArrowDown" && techIdx >= 0 && techIdx < DATA.tech.length - 1) {
     e.preventDefault();
-    navigate("/tech/" + DATA.tech[techIdx + 1]);
+    const stage = route.stage || null;
+    if (stage) navigate("/cell/" + stage + "/" + DATA.tech[techIdx + 1]);
+    else navigate("/tech/" + DATA.tech[techIdx + 1]);
   }
 });
 
