@@ -4,13 +4,13 @@ A single self-contained HTML presentation mapping how AI impacts manufacturing a
 
 ## Quick start
 
-Open offline — no build step, no network requests:
+**On your phone or any browser:**
 
-```
-ai-manufacturing-landscape/index.html
-```
+https://deanwang-bain.github.io/temp-cursor/
 
-Double-click the file or open it from a browser via `file://`.
+GitHub Pages deploys automatically from `main` via GitHub Actions whenever the landscape HTML changes.
+
+**Offline (no network):** open `ai-manufacturing-landscape/index.html` directly — double-click or use `file://`.
 
 ## Features
 
