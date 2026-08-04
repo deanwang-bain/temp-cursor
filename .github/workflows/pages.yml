@@ -26,6 +26,7 @@ jobs:
 
       - name: Prepare site
         run: |
+          mkdir -p _site
           cp ai-manufacturing-landscape/index.html _site/index.html
           touch _site/.nojekyll
 
