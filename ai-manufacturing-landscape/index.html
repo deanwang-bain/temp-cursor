@@ -392,6 +392,177 @@ button, a, input, select, [tabindex="0"] {
 .heat-4 { background: var(--ds-color-red-300); color: var(--ds-surface); }
 .heat-5 { background: var(--ds-color-red-400); color: var(--ds-surface); }
 
+/* 3D landscape */
+.landscape-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-spacing-sm);
+  margin-bottom: var(--ds-spacing-md);
+}
+.landscape-controls .chip.active {
+  background: var(--ds-color-red-400);
+  color: var(--ds-surface);
+  border-color: var(--ds-color-red-500);
+}
+.landscape-hint {
+  font-size: var(--ds-font-size-xs);
+  color: var(--ds-text-muted);
+  margin-left: auto;
+}
+.landscape-3d-wrap {
+  position: relative;
+  width: 100%;
+  height: min(70vh, 560px);
+  min-height: 320px;
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+  margin-bottom: var(--ds-spacing-lg);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--ds-surface-raised) 0%, var(--ds-surface) 100%);
+  border: 1px solid var(--ds-border-light);
+  border-radius: var(--ds-radius-md);
+}
+.landscape-3d-wrap.dragging { cursor: grabbing; }
+.landscape-3d-scene {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: transform 0.05s linear;
+}
+.landscape-3d-agentic {
+  position: absolute;
+  left: -280px;
+  top: -200px;
+  width: 560px;
+  text-align: center;
+  font-size: var(--ds-font-size-xs);
+  font-weight: bold;
+  color: var(--ds-color-red-500);
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-color-red-200);
+  border-radius: var(--ds-radius-sm);
+  padding: var(--ds-spacing-xs) var(--ds-spacing-sm);
+  transform: translateZ(80px);
+  pointer-events: none;
+}
+.landscape-3d-stage-axis {
+  position: absolute;
+  left: -280px;
+  top: 120px;
+  width: 560px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateZ(2px);
+  pointer-events: auto;
+}
+.stage-axis-label {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--ds-touch-min);
+  border: none;
+  background: transparent;
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  padding: 2px;
+  text-align: center;
+  writing-mode: horizontal-tb;
+}
+.stage-axis-label:hover { color: var(--ds-color-red-400); }
+.landscape-3d-layer {
+  position: absolute;
+  left: -280px;
+  top: -20px;
+  width: 560px;
+  transform-style: preserve-3d;
+}
+.layer-tech-label {
+  position: absolute;
+  left: -100px;
+  top: 10px;
+  width: 90px;
+  text-align: right;
+}
+.layer-tech-label button {
+  border: none;
+  background: transparent;
+  font-size: var(--ds-font-size-xs);
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--ds-text-primary);
+  min-height: var(--ds-touch-min);
+  padding: 0 var(--ds-spacing-xs);
+}
+.layer-tech-label button:hover { color: var(--ds-color-red-400); }
+.layer-voxels {
+  display: flex;
+  gap: 4px;
+  transform-style: preserve-3d;
+}
+.voxel {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.voxel:hover, .voxel:focus-visible {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateZ(8px);
+  border-color: var(--ds-color-red-400);
+  z-index: 2;
+}
+.voxel.empty {
+  background: var(--ds-surface-muted) !important;
+  opacity: 0.45;
+  border-style: dashed;
+}
+.voxel-count {
+  font-size: var(--ds-font-size-lg);
+  font-weight: bold;
+  line-height: 1;
+}
+.voxel-label {
+  font-size: 8px;
+  color: inherit;
+  opacity: 0.85;
+  text-align: center;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+.voxel.heat-4 .voxel-label, .voxel.heat-5 .voxel-label { color: var(--ds-surface); }
+.landscape-3d-floor {
+  position: absolute;
+  left: -300px;
+  top: 40px;
+  width: 600px;
+  height: 400px;
+  background: var(--ds-surface-muted);
+  opacity: 0.35;
+  transform: rotateX(90deg) translateZ(-1px);
+  pointer-events: none;
+}
+.tech-layer-predictive .layer-voxels { transform: translateZ(0px); }
+.tech-layer-generative .layer-voxels { transform: translateZ(0px); }
+.tech-layer-vision .layer-voxels { transform: translateZ(0px); }
+.tech-layer-physics .layer-voxels { transform: translateZ(0px); }
+
 /* Shapes - autonomy dots */
 .autonomy-dots, .maturity-bar { display: inline-flex; align-items: center; gap: 3px; }
 .autonomy-dot {
@@ -699,7 +870,8 @@ button, a, input, select, [tabindex="0"] {
 
 /* Print */
 @media print {
-  .left-rail, .top-rail, .toolbar, .story-nav, .detail-actions, .door { display: none !important; }
+  .left-rail, .top-rail, .toolbar, .story-nav, .detail-actions, .door, .landscape-3d-wrap, .landscape-controls { display: none !important; }
+  .landscape-flat-fallback { display: grid !important; }
   .shell { display: block !important; }
   .main-col { width: 100%; }
   .content { overflow: visible; padding: 0; }
@@ -720,6 +892,10 @@ button, a, input, select, [tabindex="0"] {
   .stage-btn { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
   .stage-btn.active { border-bottom-color: var(--ds-color-red-400); border-left: none; }
   .landscape-grid { grid-template-columns: repeat(2, 1fr); }
+  .landscape-3d-wrap { height: min(55vh, 420px); min-height: 280px; }
+  .landscape-hint { width: 100%; margin-left: 0; margin-top: var(--ds-spacing-xs); }
+  .stage-axis-label { font-size: 7px; min-height: 36px; }
+  .voxel { min-height: 44px; }
 }
 </style>
 </head>
@@ -792,7 +968,9 @@ const state = {
   mode: "entry",
   shortlist: JSON.parse(localStorage.getItem("ai-mfg-shortlist") || "[]"),
   filters: { driver: "", autonomy: "", maturity: "", robotics: false, search: "" },
-  storyStep: 1
+  storyStep: 1,
+  landscapeView: localStorage.getItem("ai-mfg-landscape-view") || (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(max-width:768px)").matches ? "flat" : "3d"),
+  sceneRotation: { x: -28, y: -32 }
 };
 
 function saveShortlist() {
@@ -855,6 +1033,8 @@ function parseRoute() {
   state.filters.maturity = params.get("maturity") || "";
   state.filters.robotics = params.get("robotics") === "1";
   state.filters.search = params.get("q") || "";
+  const viewParam = params.get("view");
+  if (viewParam === "3d" || viewParam === "flat") state.landscapeView = viewParam;
 
   const parts = pathPart.split("/").filter(Boolean);
   if (!parts.length || parts[0] === "") return { view: "entry" };
@@ -878,6 +1058,8 @@ function filterQuery() {
   if (state.filters.maturity) p.set("maturity", state.filters.maturity);
   if (state.filters.robotics) p.set("robotics", "1");
   if (state.filters.search) p.set("q", state.filters.search);
+  if (state.landscapeView === "flat") p.set("view", "flat");
+  else if (state.landscapeView === "3d") p.set("view", "3d");
   const s = p.toString();
   return s ? "?" + s : "";
 }
@@ -894,7 +1076,7 @@ function renderEntry() {
     '<div class="doors">' +
     '<button class="door" data-nav="#/stage/plan" type="button"><h2>Start with your value chain</h2><p>For a COO: walk Plan through Serve and see where AI value pools concentrate across operations.</p></button>' +
     '<button class="door" data-nav="#/tech/predictive" type="button"><h2>Start with the technology</h2><p>For a CTO: climb Predictive to Physics AI and see how each rung applies across the chain.</p></button>' +
-    '<button class="door" data-nav="#/landscape" type="button"><h2>See the whole landscape</h2><p>32-cell grid with both axes visible. Empty cells are findings, not gaps.</p></button>' +
+    '<button class="door" data-nav="#/landscape" type="button"><h2>See the whole landscape</h2><p>32-cell 3D stack or flat grid. Empty cells are findings, not gaps.</p></button>' +
     '</div>' +
     '<p class="entry-mode-links"><button type="button" class="text-link" data-nav="#/story/1">Guided story</button> (12 steps) or <button type="button" class="text-link" data-nav="#/landscape">free explore</button> with search and filters.</p>' +
     '</div>';
@@ -1030,9 +1212,8 @@ function renderEnablers() {
   return h;
 }
 
-function renderLandscape() {
-  let h = '<div class="rule-banner"><strong>Highest-rung rule:</strong> A use case is classified by the highest rung it requires. A vision model that predicts defects is Vision AI, not Predictive — 2-D beats numbers. If a solution combines vision with physics simulation or closed-loop robot control, it belongs at Physics AI &amp; Robotics.</div>';
-  h += '<div class="landscape-grid">';
+function renderLandscapeFlat() {
+  let h = '<div class="landscape-grid landscape-flat-fallback">';
   DATA.stages.forEach(stage => {
     DATA.tech.forEach(tech => {
       const cases = getCasesForCell(stage, tech);
@@ -1046,6 +1227,61 @@ function renderLandscape() {
     });
   });
   h += '</div>';
+  return h;
+}
+
+function renderLandscape3D() {
+  const rx = state.sceneRotation.x;
+  const ry = state.sceneRotation.y;
+  let h = '<div class="landscape-3d-wrap" id="landscape-3d-wrap" aria-label="3D landscape grid. Drag to rotate, tap a cell to drill in.">';
+  h += '<div class="landscape-3d-scene" id="landscape-3d-scene" style="transform: translate(-50%,-50%) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)">';
+  h += '<div class="landscape-3d-floor" aria-hidden="true"></div>';
+  h += '<div class="landscape-3d-agentic">Agentic isn\'t a technology you buy — it\'s an autonomy tier you earn.</div>';
+  h += '<div class="landscape-3d-stage-axis" role="navigation" aria-label="Value chain stages">';
+  DATA.stages.forEach(stage => {
+    h += '<button type="button" class="stage-axis-label" data-stage-nav="' + stage + '" aria-label="' + DATA.stageLabels[stage] + ' stage lens">' + DATA.stageLabels[stage] + '</button>';
+  });
+  h += '</div>';
+  DATA.tech.forEach((tech, techIdx) => {
+    const layerY = (DATA.tech.length - 1 - techIdx) * 68;
+    const layerZ = techIdx * 18;
+    h += '<div class="landscape-3d-layer tech-layer-' + tech + '" style="transform: translate3d(0, ' + (-layerY) + 'px, ' + layerZ + 'px)">';
+    h += '<div class="layer-tech-label"><button type="button" data-tech-nav="' + tech + '" aria-label="' + DATA.techLabels[tech] + ' technology lens">' + DATA.techLabels[tech] + '</button></div>';
+    h += '<div class="layer-voxels">';
+    DATA.stages.forEach(stage => {
+      const cases = getCasesForCell(stage, tech);
+      const heat = cases.length ? Math.round(avgImpact(cases)) : 0;
+      h += '<div class="voxel' + (cases.length ? ' ' + heatClass(heat) : ' empty') + '" data-cell="' + stage + '/' + tech + '" tabindex="0" role="button" aria-label="' + DATA.stageLabels[stage] + ' x ' + DATA.techLabels[tech] + ', ' + cases.length + ' use cases">';
+      h += '<span class="voxel-count">' + cases.length + '</span>';
+      h += '<span class="voxel-label">' + DATA.stageLabels[stage] + '</span>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+  });
+  h += '</div></div>';
+  return h;
+}
+
+function renderLandscapeControls() {
+  const is3d = state.landscapeView === "3d";
+  let h = '<div class="landscape-controls">';
+  h += '<button type="button" class="chip' + (is3d ? ' active' : '') + '" id="view-3d" aria-pressed="' + is3d + '">3D stack</button>';
+  h += '<button type="button" class="chip' + (!is3d ? ' active' : '') + '" id="view-flat" aria-pressed="' + !is3d + '">Flat grid</button>';
+  if (is3d) h += '<button type="button" class="chip" id="view-reset">Reset view</button>';
+  h += '<span class="landscape-hint">' + (is3d ? 'Drag to rotate. Tap a cell to drill in.' : 'Tap any cell to drill in.') + '</span>';
+  h += '</div>';
+  return h;
+}
+
+function renderLandscape() {
+  let h = '<div class="rule-banner"><strong>Highest-rung rule:</strong> A use case is classified by the highest rung it requires. A vision model that predicts defects is Vision AI, not Predictive — 2-D beats numbers. If a solution combines vision with physics simulation or closed-loop robot control, it belongs at Physics AI &amp; Robotics.</div>';
+  h += renderLandscapeControls();
+  if (state.landscapeView === "3d") {
+    h += renderLandscape3D();
+    h += '<div class="landscape-flat-fallback hidden" aria-hidden="true">' + renderLandscapeFlat() + '</div>';
+  } else {
+    h += renderLandscapeFlat();
+  }
   h += renderEnablers();
   return h;
 }
@@ -1223,7 +1459,7 @@ const STORY = [
   { title: "Dimensionality ladder", body: "<p>Technology rungs form a dimensionality ladder — each rung adds richer representation of the physical world:</p><p>Predictive AI learns patterns from data. Generative AI creates content and orchestrates workflows. Vision AI perceives the physical world through cameras. Physics AI simulates and interacts with physical systems — including robotics.</p><p>Higher rungs subsume lower ones in complexity but not in deployment ease.</p>" },
   { title: "Highest-rung rule", body: "<div class=\"callout\"><strong>Highest-rung rule:</strong> Classify each use case at the highest technology rung it genuinely requires. If a solution combines vision with physics simulation or closed-loop robot control, it belongs at Physics AI — not Vision AI.</div><p>This rule prevents double-counting and ensures robotics and digital-twin investments map to the correct strategic bucket.</p>" },
   { title: "Value chain", body: "<p>The eight stages follow the manufacturing value chain from planning through customer service:</p><p>Plan, Design, Source, Make, Quality, Maintain, Deliver, Serve.</p><p>Each stage has distinct data assets, decision cadences, and stakeholder groups — so AI value pools differ materially by stage even when the underlying technology rung is the same.</p>" },
-  { title: "Landscape", body: "<p>The 32-cell grid maps 47 use cases. Cell colour intensity reflects average impact (value at stake). Autonomy and maturity are encoded as shapes — not colours — to avoid conflating dimensions.</p><p>Four enabler domains sit below the grid as non-MECE cross-cuts: sustainability, workforce, data/IT-OT, and governance.</p>", action: "#/landscape" },
+  { title: "Landscape", body: "<p>The 32-cell landscape renders as a rotatable 3D stack — four technology layers, eight stages per layer. Height is the dimensionality ladder; depth is the value chain. Cell colour intensity reflects average impact. Toggle to flat grid anytime.</p><p>Four enabler domains sit below the grid as non-MECE cross-cuts: sustainability, workforce, data/IT-OT, and governance.</p>", action: "#/landscape" },
   { title: "Deep dive: Make x Vision", body: "<p>In-line surface inspection on an automotive body panel line demonstrates Vision AI at production cadence: CNNs classify defects at 60 jobs/hour with automatic reject routing.</p><p>Prerequisites include controlled lighting, 500+ labelled images per defect class, and integrated line-stop mechanisms. Value: 30-60% reduction in downstream quality escapes.</p>", action: "#/case/make-vision-01" },
   { title: "Deep dive: Plan x Predictive", body: "<p>Multi-echelon demand forecasting fuses POS, distributor, weather, and macro signals for S&OP. Hierarchical reconciliation rolls plant forecasts to SKU and family consistently.</p><p>Proven at global CPG scale: 2-5% revenue uplift from fill-rate improvement and 5-15% inventory reduction — but requires 24+ months of clean shipment history.</p>", action: "#/case/plan-predictive-01" },
   { title: "Deep dive: Make x Physics (Robotics)", body: "<p>Adaptive robotic welding adjusts torch path from 3-D seam profile sensing in real time. This is Physics AI with robotics — not a separate category.</p><p>Autonomy tier 4 with scaling maturity. Filter by \"Robotics\" to surface all Physics AI use cases involving physical actuation: welding, cobots, AM digital twins, AMR fleets, inspection robots, and drone surveys.</p>", action: "#/case/make-physics-01" },
@@ -1281,6 +1517,7 @@ function render() {
   html += '</div></div>';
   app.innerHTML = html;
   bindEvents(app);
+  if (route.view === "landscape" && state.landscapeView === "3d") bindLandscape3D(app);
 }
 
 function bindEvents(root) {
@@ -1365,6 +1602,99 @@ function bindEvents(root) {
       state.shortlist = state.shortlist.filter(id => id !== el.getAttribute("data-remove"));
       saveShortlist();
       render();
+    });
+  });
+  const view3d = root.querySelector("#view-3d");
+  if (view3d) view3d.addEventListener("click", () => {
+    state.landscapeView = "3d";
+    localStorage.setItem("ai-mfg-landscape-view", "3d");
+    syncFiltersHash();
+  });
+  const viewFlat = root.querySelector("#view-flat");
+  if (viewFlat) viewFlat.addEventListener("click", () => {
+    state.landscapeView = "flat";
+    localStorage.setItem("ai-mfg-landscape-view", "flat");
+    syncFiltersHash();
+  });
+  const viewReset = root.querySelector("#view-reset");
+  if (viewReset) viewReset.addEventListener("click", () => {
+    state.sceneRotation = { x: -28, y: -32 };
+    const scene = root.querySelector("#landscape-3d-scene");
+    if (scene) scene.style.transform = "translate(-50%,-50%) rotateX(-28deg) rotateY(-32deg)";
+  });
+  root.querySelectorAll("[data-stage-nav]").forEach(el => {
+    el.addEventListener("click", e => { e.stopPropagation(); navigate("/stage/" + el.getAttribute("data-stage-nav")); });
+  });
+  root.querySelectorAll("[data-tech-nav]").forEach(el => {
+    el.addEventListener("click", e => { e.stopPropagation(); navigate("/tech/" + el.getAttribute("data-tech-nav")); });
+  });
+}
+
+function bindLandscape3D(root) {
+  const wrap = root.querySelector("#landscape-3d-wrap");
+  const scene = root.querySelector("#landscape-3d-scene");
+  if (!wrap || !scene) return;
+
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let startRotX = 0, startRotY = 0;
+  let moved = false;
+
+  function applyRotation() {
+    scene.style.transform = "translate(-50%,-50%) rotateX(" + state.sceneRotation.x + "deg) rotateY(" + state.sceneRotation.y + "deg)";
+  }
+
+  function onPointerDown(e) {
+    if (e.target.closest(".voxel, .stage-axis-label, [data-tech-nav]")) return;
+    dragging = true;
+    moved = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    startRotX = state.sceneRotation.x;
+    startRotY = state.sceneRotation.y;
+    wrap.classList.add("dragging");
+    wrap.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e) {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+    state.sceneRotation.y = startRotY + dx * 0.4;
+    state.sceneRotation.x = Math.max(-75, Math.min(5, startRotX - dy * 0.35));
+    applyRotation();
+  }
+
+  function onPointerUp(e) {
+    if (!dragging) return;
+    dragging = false;
+    wrap.classList.remove("dragging");
+    try { wrap.releasePointerCapture(e.pointerId); } catch (_) {}
+  }
+
+  wrap.addEventListener("pointerdown", onPointerDown);
+  wrap.addEventListener("pointermove", onPointerMove);
+  wrap.addEventListener("pointerup", onPointerUp);
+  wrap.addEventListener("pointercancel", onPointerUp);
+
+  root.querySelectorAll(".voxel").forEach(el => {
+    const parts = el.getAttribute("data-cell").split("/");
+    let tapStart = null;
+    el.addEventListener("pointerdown", e => {
+      tapStart = { x: e.clientX, y: e.clientY };
+      e.stopPropagation();
+    });
+    el.addEventListener("pointerup", e => {
+      if (!tapStart) return;
+      const dx = Math.abs(e.clientX - tapStart.x);
+      const dy = Math.abs(e.clientY - tapStart.y);
+      if (dx < 8 && dy < 8) navigate("/cell/" + parts[0] + "/" + parts[1]);
+      tapStart = null;
+      e.stopPropagation();
+    });
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate("/cell/" + parts[0] + "/" + parts[1]); }
     });
   });
 }
