@@ -27,7 +27,7 @@ Reveal from the cover page (double-click hero or **View platform layer**) or the
 3. **Agents** — ML + LLM agents orchestrated across the pipeline
 4. **Ops** — parallel governance for compute, cost, and risk
 
-## Demo modules
+## Local development
 
 ```bash
 npm install
