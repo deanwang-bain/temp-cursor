@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { PageHeader } from "@/components/BrandLogo";
 import { Badge, Card, MetricCard } from "@/components/ui";
 import { useI18n } from "@/lib/i18n/context";
 import type { EVModel, Holiday, ProductionSlot } from "@/lib/types";
@@ -26,11 +27,8 @@ export function PlanningClient({
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.planning.title}</h2>
-        <p className="text-sm text-amber-700">{t.planning.triggered}</p>
-      </div>
+    <div className="space-y-5">
+      <PageHeader title={t.planning.title} subtitle={t.planning.triggered} />
 
       <div className="grid gap-3 sm:grid-cols-3">
         <MetricCard label={t.planning.units} value={totalUnits} sub="W33 partial schedule" />

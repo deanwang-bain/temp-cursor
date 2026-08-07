@@ -2,57 +2,107 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { useI18n } from "@/lib/i18n/context";
 
 const navItems = [
-  { href: "/", key: "home" as const },
-  { href: "/market", key: "market" as const },
-  { href: "/planning", key: "planning" as const },
-  { href: "/suppliers", key: "suppliers" as const },
-  { href: "/mes", key: "mes" as const },
-  { href: "/quality", key: "quality" as const },
-  { href: "/knowledge", key: "knowledge" as const },
+  { href: "/", key: "home" as const, icon: "⌂" },
+  { href: "/market", key: "market" as const, icon: "◉" },
+  { href: "/planning", key: "planning" as const, icon: "▦" },
+  { href: "/suppliers", key: "suppliers" as const, icon: "◎" },
+  { href: "/mes", key: "mes" as const, icon: "▣" },
+  { href: "/quality", key: "quality" as const, icon: "◈" },
+  { href: "/knowledge", key: "knowledge" as const, icon: "?" },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { t, locale, toggleLocale } = useI18n();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
-      <header className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <div>
-            <h1 className="text-lg font-semibold tracking-tight">{t.appName}</h1>
-            <p className="text-xs text-zinc-500">{t.appSubtitle}</p>
-          </div>
-          <button
-            type="button"
-            onClick={toggleLocale}
-            className="min-h-11 min-w-11 rounded-md border border-zinc-300 px-3 text-sm font-medium hover:bg-zinc-100"
-            aria-label="Toggle language"
-          >
-            {locale === "en" ? "中文" : "EN"}
-          </button>
+    <div className="flex min-h-screen bg-[var(--bg-base)]">
+      {/* Sidebar — Feishu-style left rail */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 flex w-[var(--sidebar-width)] flex-col border-r border-[var(--border)] bg-[var(--bg-sidebar)] transition-transform lg:static lg:translate-x-0 ${
+          sidebarOpen ? "translate-x-0 shadow-[var(--shadow-md)]" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex h-[var(--header-height)] items-center border-b border-[var(--border-light)] px-4">
+          <BrandLogo />
         </div>
-        <nav className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-2 pb-2">
+        <nav className="flex-1 overflow-y-auto p-2" aria-label="Main">
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium min-h-11 flex items-center ${
-                  active ? "bg-red-600 text-white" : "text-zinc-600 hover:bg-zinc-100"
+                onClick={() => setSidebarOpen(false)}
+                className={`mb-0.5 flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-medium transition-colors ${
+                  active
+                    ? "bg-[var(--primary-light)] text-[var(--primary)]"
+                    : "text-[var(--text-secondary)] hover:bg-[var(--bg-base)] hover:text-[var(--text-primary)]"
                 }`}
               >
-                {t.nav[item.key]}
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[var(--bg-base)] text-xs font-semibold">
+                  {item.icon}
+                </span>
+                <span className="truncate">{t.nav[item.key]}</span>
               </Link>
             );
           })}
         </nav>
-      </header>
-      <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+        <div className="border-t border-[var(--border-light)] p-3 text-xs text-[var(--text-muted)]">
+          {t.appSubtitle}
+        </div>
+      </aside>
+
+      {sidebarOpen && (
+        <button
+          type="button"
+          className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+          aria-label="Close menu"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Main column */}
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="sticky top-0 z-20 flex h-[var(--header-height)] items-center justify-between gap-3 border-b border-[var(--border)] bg-[var(--bg-surface)] px-4 shadow-[var(--shadow-sm)]">
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              type="button"
+              className="btn-secondary min-h-9 px-3 lg:hidden"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open menu"
+            >
+              ≡
+            </button>
+            <div className="hidden lg:block">
+              <BrandLogo collapsed />
+            </div>
+          </div>
+
+          <div className="hidden flex-1 max-w-md md:block">
+            <input
+              type="search"
+              placeholder={t.common.search + "…"}
+              className="input-field h-9 text-sm"
+              aria-label={t.common.search}
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={toggleLocale} className="btn-secondary min-h-9 px-3 text-sm">
+              {locale === "en" ? "中文" : "EN"}
+            </button>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+      </div>
     </div>
   );
 }

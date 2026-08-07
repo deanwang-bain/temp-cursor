@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { PageHeader } from "@/components/BrandLogo";
 import { Badge, Card, MetricCard } from "@/components/ui";
 import { useI18n } from "@/lib/i18n/context";
 import type { EVModel, MesMetrics, MesStation } from "@/lib/types";
@@ -60,12 +61,11 @@ export function MesClient({
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.mes.title}</h2>
-        <p className="text-sm text-zinc-500">{t.mes.subtitle}</p>
-        <p className="mt-1 text-xs text-zinc-400">{t.common.live}: {new Date(metrics.timestamp).toLocaleString()} · {displayModel} · {t.mes.target} VPH {metrics.targetVph}</p>
-      </div>
+    <div className="space-y-5">
+      <PageHeader
+        title={t.mes.title}
+        subtitle={`${t.mes.subtitle} · ${t.common.live}: ${new Date(metrics.timestamp).toLocaleString()} · ${displayModel}`}
+      />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <MetricCard label={t.mes.oee} value={`${metrics.oee}%`} sub={`A ${metrics.availability}% · P ${metrics.performance}% · Q ${metrics.quality}%`} alert={metrics.oee < 78} />
@@ -89,7 +89,7 @@ export function MesClient({
             </label>
           ))}
         </div>
-        <button type="button" onClick={saveOverrides} className="mt-3 min-h-11 rounded-md bg-red-600 px-4 text-sm text-white hover:bg-red-700">
+        <button type="button" onClick={saveOverrides} className="btn-primary mt-3">
           {saved ? "✓" : t.common.save}
         </button>
       </Card>
@@ -137,7 +137,7 @@ export function MesClient({
 
       <Card title={t.mes.report}>
         <p className="mb-3 text-sm text-zinc-500">{t.mes.reportHint}</p>
-        <button type="button" onClick={exportReport} className="min-h-11 rounded-md border border-zinc-300 px-4 text-sm hover:bg-zinc-50">{t.common.export}</button>
+        <button type="button" onClick={exportReport} className="btn-secondary">{t.common.export}</button>
         {reportMsg && <p className="mt-2 text-sm text-emerald-700">{reportMsg}</p>}
       </Card>
     </div>

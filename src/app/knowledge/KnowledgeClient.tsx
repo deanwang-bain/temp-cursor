@@ -1,14 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui";
+import { PageHeader } from "@/components/BrandLogo";
+import { Badge, Card, SegmentedControl } from "@/components/ui";
+import { useChatProvider } from "@/lib/chat-context";
 import { useI18n } from "@/lib/i18n/context";
 import type { KnowledgeArticle } from "@/lib/types";
+import type { ChatProviderId } from "@/lib/chat/types";
 
-type ChatMsg = { role: "user" | "assistant"; text: string };
+type ChatMsg = { role: "user" | "assistant"; text: string; provider?: ChatProviderId };
 
 export function KnowledgeClient({ articles }: { articles: KnowledgeArticle[] }) {
   const { t, locale } = useI18n();
+  const { provider, setProvider } = useChatProvider();
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [loading, setLoading] = useState(false);
@@ -23,57 +27,101 @@ export function KnowledgeClient({ articles }: { articles: KnowledgeArticle[] }) 
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: userText, locale }),
+        body: JSON.stringify({ query: userText, locale, provider }),
       });
       const data = await res.json();
-      setMessages((m) => [...m, { role: "assistant", text: data.answer }]);
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", text: data.answer, provider: data.provider },
+      ]);
     } catch {
-      setMessages((m) => [...m, { role: "assistant", text: locale === "zh" ? "请求失败，请重试。" : "Request failed. Please retry." }]);
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          text: locale === "zh" ? "请求失败，请重试。" : "Request failed. Please retry.",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.knowledge.title}</h2>
-      </div>
+    <div className="space-y-5">
+      <PageHeader title={t.knowledge.title} />
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card title={t.knowledge.articles}>
-          <ul className="max-h-96 space-y-3 overflow-y-auto text-sm">
+      <div className="grid gap-4 xl:grid-cols-5">
+        <Card title={t.knowledge.articles} className="xl:col-span-2">
+          <ul className="max-h-[480px] space-y-2 overflow-y-auto text-sm">
             {articles.map((a) => (
-              <li key={a.id} className="rounded border border-zinc-100 p-3">
-                <div className="font-medium">{locale === "zh" ? a.titleZh : a.title}</div>
-                <div className="text-xs text-zinc-400">{locale === "zh" ? a.categoryZh : a.category}</div>
-                <p className="mt-1 text-zinc-600">{locale === "zh" ? a.contentZh : a.content}</p>
+              <li
+                key={a.id}
+                className="rounded-lg border border-[var(--border-light)] p-3 hover:border-[var(--primary-light)] hover:bg-[var(--primary-muted)]/30"
+              >
+                <div className="font-medium text-[var(--text-primary)]">
+                  {locale === "zh" ? a.titleZh : a.title}
+                </div>
+                <Badge tone="primary">{locale === "zh" ? a.categoryZh : a.category}</Badge>
+                <p className="mt-2 text-[var(--text-secondary)] line-clamp-3">
+                  {locale === "zh" ? a.contentZh : a.content}
+                </p>
               </li>
             ))}
           </ul>
         </Card>
 
-        <Card title={t.knowledge.chat}>
-          <div className="mb-3 max-h-64 space-y-2 overflow-y-auto rounded border border-zinc-100 bg-zinc-50 p-2 text-sm">
+        <Card
+          title={t.knowledge.chat}
+          className="xl:col-span-3"
+          action={
+            <SegmentedControl
+              value={provider}
+              options={[
+                { id: "fake", label: t.knowledge.providerFake },
+                { id: "openai", label: t.knowledge.providerOpenai },
+              ]}
+              onChange={setProvider}
+            />
+          }
+        >
+          <p className="mb-3 text-xs text-[var(--text-muted)]">{t.knowledge.providerHint}</p>
+
+          <div className="mb-3 flex h-[360px] flex-col gap-2 overflow-y-auto rounded-lg border border-[var(--border-light)] bg-[var(--bg-base)] p-3 text-sm">
             {messages.length === 0 && (
-              <p className="text-zinc-400">{locale === "zh" ? "试试：OEE 怎么算？换型需要多久？" : "Try: How is OEE calculated? How long is changeover?"}</p>
+              <p className="text-[var(--text-muted)]">{t.knowledge.chatEmpty}</p>
             )}
             {messages.map((m, i) => (
-              <div key={i} className={`rounded p-2 ${m.role === "user" ? "ml-8 bg-white" : "mr-8 bg-red-50"}`}>
+              <div
+                key={i}
+                className={`max-w-[85%] rounded-lg px-3 py-2 ${
+                  m.role === "user"
+                    ? "ml-auto bg-[var(--primary)] text-white"
+                    : "mr-auto border border-[var(--border-light)] bg-[var(--bg-surface)] text-[var(--text-primary)]"
+                }`}
+              >
                 {m.text}
+                {m.role === "assistant" && m.provider && (
+                  <div className="mt-1 text-[10px] opacity-60">
+                    {m.provider === "openai" ? "ChatGPT" : "Demo"}
+                  </div>
+                )}
               </div>
             ))}
-            {loading && <p className="text-zinc-400">{t.common.loading}</p>}
+            {loading && (
+              <p className="text-[var(--text-muted)]">{t.common.loading}</p>
+            )}
           </div>
+
           <div className="flex gap-2">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && send()}
+              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && send()}
               placeholder={t.knowledge.chatPlaceholder}
-              className="min-h-11 flex-1 rounded border border-zinc-300 px-3 text-sm"
+              className="input-field flex-1"
             />
-            <button type="button" onClick={send} disabled={loading} className="min-h-11 rounded-md bg-red-600 px-4 text-sm text-white hover:bg-red-700 disabled:opacity-50">
+            <button type="button" onClick={send} disabled={loading} className="btn-primary shrink-0">
               {t.knowledge.send}
             </button>
           </div>

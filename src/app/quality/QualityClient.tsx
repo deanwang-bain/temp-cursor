@@ -1,5 +1,6 @@
 "use client";
 
+import { PageHeader } from "@/components/BrandLogo";
 import { Card, Badge } from "@/components/ui";
 import { useI18n } from "@/lib/i18n/context";
 import type { QualityIssue, Supplier } from "@/lib/types";
@@ -14,11 +15,8 @@ export function QualityClient({ issues, suppliers }: { issues: QualityIssue[]; s
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.quality.title}</h2>
-        <p className="text-sm text-zinc-500">{t.quality.subtitle}</p>
-      </div>
+    <div className="space-y-5">
+      <PageHeader title={t.quality.title} subtitle={t.quality.subtitle} />
 
       <div className="space-y-4">
         {issues.map((q) => (

@@ -46,6 +46,17 @@ All data is in `src/data/*.json`, grounded in typical automotive benchmarks:
 
 See `docs/DATA-PLAN.md` for the full data dictionary.
 
-## Previous work
+## Chat assistant modes
+
+On **Knowledge & Chat**, switch between:
+
+- **Demo mode** — rule-based answers from the knowledge base (default, no API key)
+- **ChatGPT** — calls OpenAI using `OPENAI_API_KEY` on the server
+
+Copy `.env.example` to `.env.local` for local dev, or add env vars in Vercel project settings.
+
+## UI
+
+Feishu-inspired layout: left sidebar navigation, top bar with search and language toggle, brand-agnostic logo slot in `src/components/BrandLogo.tsx`.
 
 The AI × Manufacturing landscape HTML presentation was moved to `backup/ai-manufacturing-landscape/`.

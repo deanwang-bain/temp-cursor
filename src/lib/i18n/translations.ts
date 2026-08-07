@@ -94,7 +94,11 @@ export const translations = {
       articles: "Training articles",
       chat: "Ask the assistant",
       chatPlaceholder: "Ask about changeover, OEE, suppliers, quality…",
+      chatEmpty: "Try: How is OEE calculated? How long is changeover?",
       send: "Send",
+      providerFake: "Demo mode",
+      providerOpenai: "ChatGPT",
+      providerHint: "Demo mode uses the knowledge base. ChatGPT requires OPENAI_API_KEY on the server.",
     },
   },
   zh: {
@@ -192,7 +196,11 @@ export const translations = {
       articles: "培训文章",
       chat: "向助手提问",
       chatPlaceholder: "询问换型、OEE、供应商、质量…",
+      chatEmpty: "试试：OEE 怎么算？换型需要多久？",
       send: "发送",
+      providerFake: "演示模式",
+      providerOpenai: "ChatGPT",
+      providerHint: "演示模式使用知识库匹配。ChatGPT 需在服务端配置 OPENAI_API_KEY。",
     },
   },
 } as const;

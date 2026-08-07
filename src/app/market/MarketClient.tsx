@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { PageHeader } from "@/components/BrandLogo";
 import { Badge, Card } from "@/components/ui";
 import { getModelName } from "@/lib/data";
 import { useI18n } from "@/lib/i18n/context";
@@ -27,14 +28,12 @@ export function MarketClient({
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.market.title}</h2>
-      </div>
+    <div className="space-y-5">
+      <PageHeader title={t.market.title} />
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Card title={t.market.newsFeed}>
-          <button type="button" onClick={processNews} className="mb-3 min-h-11 rounded-md bg-red-600 px-4 text-sm text-white hover:bg-red-700">
+          <button type="button" onClick={processNews} className="btn-primary mb-3">
             {t.market.process}
           </button>
           <ul className="space-y-3">
@@ -90,7 +89,7 @@ export function MarketClient({
                   <tr key={d.modelId} className="border-b border-zinc-50">
                     <td className="py-2 font-medium">{getModelName(d.modelId, locale)}</td>
                     <td>{d.baseline}</td>
-                    <td className="font-semibold text-red-700">{d.adjusted}</td>
+                    <td className="font-semibold text-[var(--primary)]">{d.adjusted}</td>
                     <td className={delta >= 0 ? "text-emerald-600" : "text-red-600"}>{delta >= 0 ? "+" : ""}{delta}</td>
                     <td className="text-zinc-600">{locale === "zh" ? d.signalZh : d.signal}</td>
                   </tr>

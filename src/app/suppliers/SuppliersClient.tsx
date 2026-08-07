@@ -1,5 +1,6 @@
 "use client";
 
+import { PageHeader } from "@/components/BrandLogo";
 import { Card, Badge } from "@/components/ui";
 import { useI18n } from "@/lib/i18n/context";
 import type { Supplier } from "@/lib/types";
@@ -8,11 +9,8 @@ export function SuppliersClient({ suppliers }: { suppliers: Supplier[] }) {
   const { t, locale } = useI18n();
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold">{t.suppliers.title}</h2>
-        <p className="text-sm text-zinc-500">{t.suppliers.subtitle}</p>
-      </div>
+    <div className="space-y-5">
+      <PageHeader title={t.suppliers.title} subtitle={t.suppliers.subtitle} />
 
       <div className="grid gap-4">
         {suppliers.map((s) => (
