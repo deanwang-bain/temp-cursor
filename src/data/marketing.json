@@ -6,7 +6,11 @@
     "channel": "WeChat / Dealer",
     "message": "Lock in 2026 EV tax savings — Nova SUV test drives up 12% this week.",
     "messageZh": "锁定2026购置税优惠 — Nova SUV 本周试驾量增12%。",
-    "status": "live"
+    "status": "live",
+    "agentId": "agent-marketing-copywriter",
+    "confidence": 0.91,
+    "aiRationale": "Generated from news-001 tax policy + Nova demand uplift",
+    "aiRationaleZh": "由 news-001 减税政策与 Nova 需求 uplift 生成"
   },
   {
     "id": "msg-002",
@@ -15,7 +19,11 @@
     "channel": "Digital / CRM",
     "message": "City range, factory warranty — Spark Hatch value story for urban buyers.",
     "messageZh": "城市续航，原厂质保 — Spark 城市用户价值主张。",
-    "status": "approved"
+    "status": "approved",
+    "agentId": "agent-marketing-copywriter",
+    "confidence": 0.85,
+    "aiRationale": "Approved by marketing lead — urban segment positioning",
+    "aiRationaleZh": "市场负责人已批准 — 城市细分定位"
   },
   {
     "id": "msg-003",
@@ -24,6 +32,10 @@
     "channel": "SMS / App push",
     "message": "Beat the heat — schedule a Pulse Sedan test drive this weekend.",
     "messageZh": "清凉出行 — 本周末预约 Pulse 试驾。",
-    "status": "draft"
+    "status": "draft",
+    "agentId": "agent-marketing-copywriter",
+    "confidence": 0.79,
+    "aiRationale": "Draft — heatwave trigger; awaiting human approval for public channel",
+    "aiRationaleZh": "草稿 — 高温触发；公开渠道待人工审批"
   }
 ]

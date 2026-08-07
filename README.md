@@ -4,17 +4,30 @@ A bilingual (English / 中文) web demo for integrated AI use cases across EV ca
 
 ## Deploy
 
-### Vercel (recommended)
+See **`docs/DEPLOY-VERCEL.md`** for step-by-step Vercel deployment, optional ChatGPT env vars, and demo walkthrough.
 
-1. Import this repository in [Vercel](https://vercel.com/new)
-2. Framework preset: **Next.js**
-3. Deploy — no environment variables required for the demo
+Quick start: import repo at [vercel.com/new](https://vercel.com/new) → Next.js preset → Deploy.
 
-### GitHub Pages
+To recreate this demo in another repo, use **`docs/SPIN-UP-PROMPT.md`**.
 
-This app is a Next.js server app; use **Vercel** or `npm run build && npm start` on Node hosting. The previous static landscape lives in `backup/`.
+## Platform layer (behind the scenes)
 
-## Local development
+| Route | Purpose |
+|-------|---------|
+| `/ontology` | Semantic layer — raw news → extractions → canonical graph |
+| `/agents` | Agent orchestration — promote, invent, retire (“HR for agents”) |
+| `/ops` | Compute, tokens, cost, human review, alarms |
+
+Reveal from the cover page (double-click hero or **View platform layer**) or the header toggle.
+
+## Four advantages demonstrated
+
+1. **无感 AI** — inline AI-set badges, minimal workflow disruption
+2. **Ontology** — unstructured data mapped to shared semantic layer
+3. **Agents** — ML + LLM agents orchestrated across the pipeline
+4. **Ops** — parallel governance for compute, cost, and risk
+
+## Demo modules
 
 ```bash
 npm install

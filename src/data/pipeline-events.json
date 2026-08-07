@@ -4,34 +4,43 @@
     "at": "2026-08-07T11:18:00Z",
     "module": "market",
     "message": "News news-005 ingested → ontology updated → Spark demand +12%",
-    "messageZh": "新闻 news-005 入库 → 本体更新 → Spark 需求 +12%"
+    "messageZh": "新闻 news-005 入库 → 本体更新 → Spark 需求 +12%",
+    "agentId": "agent-orchestrator-market",
+    "humanReviewed": false
   },
   {
     "id": "evt-2",
     "at": "2026-08-07T11:19:00Z",
     "module": "planning",
     "message": "Demand signal triggered APS refresh for W33 mix",
-    "messageZh": "需求信号触发 W33 混线计划刷新"
+    "messageZh": "需求信号触发 W33 混线计划刷新",
+    "agentId": "agent-aps-planner",
+    "humanReviewed": false
   },
   {
     "id": "evt-3",
     "at": "2026-08-07T11:19:30Z",
     "module": "suppliers",
     "message": "Supplier sup-inverter flagged — quantity pattern matched",
-    "messageZh": "供应商 sup-inverter 标记 — 数量模式命中"
+    "messageZh": "供应商 sup-inverter 标记 — 数量模式命中",
+    "agentId": "agent-supplier-risk",
+    "humanReviewed": true
   },
   {
     "id": "evt-4",
     "at": "2026-08-07T11:20:00Z",
     "module": "mes",
     "message": "MES heartbeat — OEE 78.4%, VPH 27.6, st-50 alarm",
-    "messageZh": "MES 心跳 — OEE 78.4%，VPH 27.6，st-50 报警"
+    "messageZh": "MES 心跳 — OEE 78.4%，VPH 27.6，st-50 报警",
+    "humanReviewed": false
   },
   {
     "id": "evt-5",
     "at": "2026-08-07T11:20:15Z",
     "module": "quality",
     "message": "QI-101 linked to supplier sup-inverter in TQM",
-    "messageZh": "QI-101 已在 TQM 关联供应商 sup-inverter"
+    "messageZh": "QI-101 已在 TQM 关联供应商 sup-inverter",
+    "agentId": "agent-root-cause-analyst",
+    "humanReviewed": true
   }
 ]

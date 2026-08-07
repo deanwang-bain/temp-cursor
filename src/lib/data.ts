@@ -1,3 +1,7 @@
+import agents from "@/data/agents.json";
+import opsMetrics from "@/data/ops-metrics.json";
+import opsHistory from "@/data/ops-history.json";
+import ontologySources from "@/data/ontology-sources.json";
 import models from "@/data/models.json";
 import news from "@/data/news.json";
 import ontology from "@/data/ontology.json";
@@ -21,7 +25,11 @@ import type {
   MesMetrics,
   MesStation,
   NewsArticle,
+  AgentRecord,
   OntologyEntity,
+  OntologyExtraction,
+  OpsHistoryPoint,
+  OpsMetrics,
   PipelineEvent,
   ProductionSlot,
   QualityIssue,
@@ -82,6 +90,44 @@ export function getKnowledge(): KnowledgeArticle[] {
 
 export function getPipelineEvents(): PipelineEvent[] {
   return pipelineEvents as PipelineEvent[];
+}
+
+export function getAgents(): AgentRecord[] {
+  return agents as AgentRecord[];
+}
+
+export function getAgentById(id: string): AgentRecord | undefined {
+  return getAgents().find((a) => a.id === id);
+}
+
+export function getOpsMetrics(): OpsMetrics {
+  return opsMetrics as OpsMetrics;
+}
+
+export function getOpsHistory(): OpsHistoryPoint[] {
+  return opsHistory as OpsHistoryPoint[];
+}
+
+export function getOntologySources(): OntologyExtraction[] {
+  return ontologySources as OntologyExtraction[];
+}
+
+export function getPlatformStats() {
+  const ontologyEntities = getOntology().length;
+  const agentList = getAgents();
+  const activeAgents = agentList.filter((a) => a.status === "active" || a.status === "promoted").length;
+  const shadowAgents = agentList.filter((a) => a.status === "shadow").length;
+  const ops = getOpsMetrics();
+  const openAlarms = ops.alarms.filter((a) => !a.resolvedAt).length;
+  return {
+    ontologyEntities,
+    ontologyLayers: 3,
+    activeAgents,
+    shadowAgents,
+    totalAgents: agentList.length,
+    todayCostUsd: ops.tokenUsage.todayCostUsd,
+    openAlarms,
+  };
 }
 
 export function getModelName(id: string, locale: "en" | "zh"): string {

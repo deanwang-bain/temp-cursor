@@ -1,0 +1,232 @@
+[
+  {
+    "id": "agent-demand-forecaster",
+    "name": "Demand Forecast Agent",
+    "nameZh": "需求预测智能体",
+    "role": "Adjusts baseline demand from market signals",
+    "roleZh": "根据市场信号调整基线需求",
+    "module": "market",
+    "teamId": "team-market-intel",
+    "managerAgentId": "agent-orchestrator-market",
+    "modelType": "traditional_ml",
+    "modelBacking": "xgboost-v2.3 + prophet-seasonal",
+    "status": "active",
+    "autonomyLevel": 3,
+    "hiredAt": "2026-03-01T00:00:00Z",
+    "lastReviewAt": "2026-08-01T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 214,
+      "acceptRate": 0.93,
+      "humanOverrides30d": 15,
+      "avgConfidence": 0.87,
+      "driftScore": 0.12,
+      "costUsd30d": 4.8
+    },
+    "guardrails": { "maxAutonomyLevel": 3, "escalateBelowConfidence": 0.6 },
+    "lifecycle": [
+      { "at": "2026-03-01T00:00:00Z", "type": "invented", "note": "Deployed in shadow mode", "noteZh": "以影子模式部署", "actor": "human" },
+      { "at": "2026-03-20T00:00:00Z", "type": "promoted", "note": "Promoted to active after 3 weeks shadow", "noteZh": "影子运行三周后转正", "actor": "human" }
+    ],
+    "producedRefs": [{ "type": "demand_adjust", "id": "w33-spark-hatch" }]
+  },
+  {
+    "id": "agent-marketing-copywriter",
+    "name": "Marketing Copy Agent",
+    "nameZh": "营销文案智能体",
+    "role": "Drafts channel messages from triggered news + demand",
+    "roleZh": "根据新闻与需求信号生成渠道文案",
+    "module": "market",
+    "teamId": "team-market-intel",
+    "managerAgentId": "agent-orchestrator-market",
+    "modelType": "llm",
+    "modelBacking": "gpt-4o-mini",
+    "status": "active",
+    "autonomyLevel": 2,
+    "hiredAt": "2026-04-10T00:00:00Z",
+    "lastReviewAt": "2026-07-28T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 38,
+      "acceptRate": 0.71,
+      "humanOverrides30d": 11,
+      "avgConfidence": 0.79,
+      "driftScore": 0.05,
+      "costUsd30d": 22.4
+    },
+    "guardrails": {
+      "maxAutonomyLevel": 2,
+      "escalateBelowConfidence": 0.7,
+      "requiresHumanApprovalAbove": "channel:public"
+    },
+    "lifecycle": [
+      { "at": "2026-04-10T00:00:00Z", "type": "invented", "note": "Spun up to cover Q2 launch volume", "noteZh": "为二季度上市需求新建", "actor": "human" }
+    ],
+    "producedRefs": [{ "type": "marketing", "id": "msg-003" }]
+  },
+  {
+    "id": "agent-orchestrator-market",
+    "name": "Market Intel Orchestrator",
+    "nameZh": "市场情报编排智能体",
+    "role": "Coordinates and reviews the market-intel agent team",
+    "roleZh": "统筹并复核市场情报团队智能体",
+    "module": "market",
+    "teamId": "team-market-intel",
+    "modelType": "llm",
+    "modelBacking": "gpt-4o",
+    "status": "active",
+    "autonomyLevel": 2,
+    "hiredAt": "2026-02-01T00:00:00Z",
+    "lastReviewAt": "2026-08-01T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 12,
+      "acceptRate": 1,
+      "humanOverrides30d": 0,
+      "avgConfidence": 0.95,
+      "driftScore": 0,
+      "costUsd30d": 9.6
+    },
+    "guardrails": { "maxAutonomyLevel": 2, "escalateBelowConfidence": 0.75 },
+    "lifecycle": [
+      { "at": "2026-02-01T00:00:00Z", "type": "invented", "note": "Manages promote/retire for market team", "noteZh": "负责市场团队智能体晋升与退役", "actor": "human" }
+    ]
+  },
+  {
+    "id": "agent-aps-planner",
+    "name": "APS Planning Agent",
+    "nameZh": "APS 排程智能体",
+    "role": "Refreshes mixed-line schedule on demand signals",
+    "roleZh": "根据需求信号刷新混线排程",
+    "module": "planning",
+    "teamId": "team-supply-chain",
+    "modelType": "traditional_ml",
+    "modelBacking": "constraint-solver + heuristics",
+    "status": "active",
+    "autonomyLevel": 3,
+    "hiredAt": "2026-01-10T00:00:00Z",
+    "lastReviewAt": "2026-07-20T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 48,
+      "acceptRate": 0.96,
+      "humanOverrides30d": 2,
+      "avgConfidence": 0.9,
+      "driftScore": 0.04,
+      "costUsd30d": 0.8
+    },
+    "guardrails": { "maxAutonomyLevel": 3, "escalateBelowConfidence": 0.65 },
+    "lifecycle": [
+      { "at": "2026-01-10T00:00:00Z", "type": "invented", "note": "Integrated with existing APS UI", "noteZh": "嵌入现有 APS 界面", "actor": "human" }
+    ]
+  },
+  {
+    "id": "agent-supplier-risk",
+    "name": "Supplier Risk Agent",
+    "nameZh": "供应商风险智能体",
+    "role": "Flags OTIF / quantity anomalies",
+    "roleZh": "识别 OTIF 与数量异常",
+    "module": "suppliers",
+    "teamId": "team-supply-chain",
+    "modelType": "traditional_ml",
+    "modelBacking": "isolation-forest-v1",
+    "status": "active",
+    "autonomyLevel": 3,
+    "hiredAt": "2026-01-15T00:00:00Z",
+    "lastReviewAt": "2026-07-15T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 60,
+      "acceptRate": 0.97,
+      "humanOverrides30d": 2,
+      "avgConfidence": 0.68,
+      "driftScore": 0.31,
+      "costUsd30d": 1.1
+    },
+    "guardrails": { "maxAutonomyLevel": 3, "escalateBelowConfidence": 0.65 },
+    "lifecycle": [
+      { "at": "2026-01-15T00:00:00Z", "type": "invented", "note": "", "noteZh": "", "actor": "human" },
+      { "at": "2026-06-01T00:00:00Z", "type": "retrained", "note": "Retrained on Q2 OTIF data after drift alert", "noteZh": "因漂移告警使用 Q2 数据重训", "actor": "system" }
+    ],
+    "producedRefs": [{ "type": "supplier_flag", "id": "sup-inverter" }, { "type": "supplier_flag", "id": "sup-battery" }]
+  },
+  {
+    "id": "agent-root-cause-analyst",
+    "name": "Root Cause Analyst Agent",
+    "nameZh": "根因分析智能体",
+    "role": "Drafts root cause + corrective action from defect patterns",
+    "roleZh": "根据缺陷模式生成根因与纠正措施",
+    "module": "quality",
+    "teamId": "team-quality",
+    "modelType": "hybrid",
+    "modelBacking": "rules-engine + gpt-4o-mini",
+    "status": "shadow",
+    "autonomyLevel": 1,
+    "hiredAt": "2026-07-01T00:00:00Z",
+    "lastReviewAt": "2026-08-05T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 4,
+      "acceptRate": 0.5,
+      "humanOverrides30d": 2,
+      "avgConfidence": 0.62,
+      "driftScore": 0,
+      "costUsd30d": 3.2
+    },
+    "guardrails": { "maxAutonomyLevel": 1, "escalateBelowConfidence": 0.8 },
+    "lifecycle": [
+      { "at": "2026-07-01T00:00:00Z", "type": "invented", "note": "Shadow mode — all outputs reviewed by QA lead", "noteZh": "影子模式，所有输出需质量负责人复核", "actor": "human" }
+    ],
+    "producedRefs": [{ "type": "quality_root_cause", "id": "qi-101" }]
+  },
+  {
+    "id": "agent-knowledge-assistant",
+    "name": "Knowledge Assistant Agent",
+    "nameZh": "知识助手智能体",
+    "role": "Answers training questions from corpus + optional LLM",
+    "roleZh": "基于知识库与可选 LLM 回答培训问题",
+    "module": "knowledge",
+    "teamId": "team-knowledge",
+    "modelType": "llm",
+    "modelBacking": "gpt-4o-mini / rule-based fallback",
+    "status": "active",
+    "autonomyLevel": 2,
+    "hiredAt": "2026-05-01T00:00:00Z",
+    "lastReviewAt": "2026-08-01T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 156,
+      "acceptRate": 0.88,
+      "humanOverrides30d": 8,
+      "avgConfidence": 0.84,
+      "driftScore": 0.02,
+      "costUsd30d": 12.5
+    },
+    "guardrails": { "maxAutonomyLevel": 2, "escalateBelowConfidence": 0.7 },
+    "lifecycle": [
+      { "at": "2026-05-01T00:00:00Z", "type": "invented", "note": "Demo mode by default; ChatGPT when API key set", "noteZh": "默认演示模式；配置 API Key 后启用 ChatGPT", "actor": "human" }
+    ]
+  },
+  {
+    "id": "agent-news-extractor",
+    "name": "News Entity Extractor",
+    "nameZh": "新闻实体抽取智能体",
+    "role": "Maps unstructured news to ontology entities",
+    "roleZh": "将非结构化新闻映射到本体实体",
+    "module": "market",
+    "teamId": "team-market-intel",
+    "managerAgentId": "agent-orchestrator-market",
+    "modelType": "hybrid",
+    "modelBacking": "NER-v4 + gpt-4o-mini",
+    "status": "retired",
+    "autonomyLevel": 2,
+    "hiredAt": "2025-11-01T00:00:00Z",
+    "lastReviewAt": "2026-06-15T00:00:00Z",
+    "performance": {
+      "decisionsLast30d": 0,
+      "acceptRate": 0.82,
+      "humanOverrides30d": 0,
+      "avgConfidence": 0.74,
+      "driftScore": 0.45,
+      "costUsd30d": 0
+    },
+    "guardrails": { "maxAutonomyLevel": 2, "escalateBelowConfidence": 0.75 },
+    "lifecycle": [
+      { "at": "2025-11-01T00:00:00Z", "type": "invented", "note": "First-gen NER pipeline", "noteZh": "第一代 NER 流水线", "actor": "human" },
+      { "at": "2026-06-15T00:00:00Z", "type": "retired", "note": "Retired after drift exceeded threshold twice; replaced by hybrid extractor", "noteZh": "漂移两次超阈值后退役，由混合抽取智能体接替", "actor": "human" }
+    ]
+  }
+]

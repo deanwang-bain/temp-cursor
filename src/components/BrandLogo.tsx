@@ -23,10 +23,21 @@ export function BrandLogo({ collapsed = false }: { collapsed?: boolean }) {
   );
 }
 
-export function PageHeader({ title, subtitle, actions }: { title: string; subtitle?: string; actions?: ReactNode }) {
+export function PageHeader({
+  title,
+  subtitle,
+  actions,
+  prefix,
+}: {
+  title: string;
+  subtitle?: string;
+  actions?: ReactNode;
+  prefix?: string;
+}) {
   return (
     <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
       <div>
+        {prefix ? <div className="page-prefix">{prefix}</div> : null}
         <h1 className="page-title">{title}</h1>
         {subtitle ? <p className="page-subtitle">{subtitle}</p> : null}
       </div>

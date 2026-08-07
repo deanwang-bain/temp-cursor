@@ -23,12 +23,35 @@ export type NewsArticle = {
   processed: boolean;
 };
 
+export type OntologyLayer = "raw" | "resolved" | "canonical";
+
 export type OntologyEntity = {
   id: string;
   type: "market" | "competitor" | "policy" | "technology" | "model" | "demand_driver";
   label: string;
   labelZh: string;
   relations: { targetId: string; relation: string; relationZh: string }[];
+  layer?: OntologyLayer;
+  confidence?: number;
+  sourceRefs?: { type: "news"; id: string; snippet: string; snippetZh?: string }[];
+  resolvedBy?: string;
+  firstSeenAt?: string;
+  lastUpdatedAt?: string;
+};
+
+export type OntologyExtraction = {
+  newsId: string;
+  headline: string;
+  headlineZh: string;
+  rawSnippet: string;
+  rawSnippetZh: string;
+  extractions: {
+    text: string;
+    textZh?: string;
+    type: string;
+    confidence: number;
+    resolvedOntologyId?: string;
+  }[];
 };
 
 export type DemandForecast = {
@@ -38,6 +61,10 @@ export type DemandForecast = {
   adjusted: number;
   signal: string;
   signalZh: string;
+  agentId?: string;
+  confidence?: number;
+  aiRationale?: string;
+  aiRationaleZh?: string;
 };
 
 export type MarketingMessage = {
@@ -48,6 +75,10 @@ export type MarketingMessage = {
   message: string;
   messageZh: string;
   status: "draft" | "approved" | "live";
+  agentId?: string;
+  confidence?: number;
+  aiRationale?: string;
+  aiRationaleZh?: string;
 };
 
 export type ProductionSlot = {
@@ -141,4 +172,98 @@ export type PipelineEvent = {
   module: string;
   message: string;
   messageZh: string;
+  agentId?: string;
+  humanReviewed?: boolean;
+};
+
+export type ModelType = "traditional_ml" | "llm" | "hybrid" | "rules";
+export type AgentStatus = "candidate" | "shadow" | "active" | "promoted" | "retired" | "retired_pending_review";
+
+export type AgentLifecycleEvent = {
+  at: string;
+  type: "invented" | "promoted" | "demoted" | "retrained" | "retired" | "incident";
+  note: string;
+  noteZh: string;
+  actor: "system" | "human";
+};
+
+export type AgentRecord = {
+  id: string;
+  name: string;
+  nameZh: string;
+  role: string;
+  roleZh: string;
+  module: "market" | "planning" | "suppliers" | "mes" | "quality" | "knowledge";
+  teamId: string;
+  managerAgentId?: string;
+  modelType: ModelType;
+  modelBacking: string;
+  status: AgentStatus;
+  autonomyLevel: 1 | 2 | 3 | 4;
+  hiredAt: string;
+  lastReviewAt: string;
+  performance: {
+    decisionsLast30d: number;
+    acceptRate: number;
+    humanOverrides30d: number;
+    avgConfidence: number;
+    driftScore: number;
+    costUsd30d: number;
+  };
+  guardrails: {
+    maxAutonomyLevel: 1 | 2 | 3 | 4;
+    escalateBelowConfidence: number;
+    requiresHumanApprovalAbove?: string;
+  };
+  lifecycle: AgentLifecycleEvent[];
+  producedRefs?: { type: string; id: string }[];
+};
+
+export type OpsAlarmSeverity = "info" | "warn" | "critical";
+
+export type OpsAlarm = {
+  id: string;
+  openedAt: string;
+  resolvedAt?: string;
+  severity: OpsAlarmSeverity;
+  module: string;
+  agentId?: string;
+  title: string;
+  titleZh: string;
+  detail: string;
+  detailZh: string;
+  resolvedBy?: "auto" | "human";
+};
+
+export type OpsMetrics = {
+  timestamp: string;
+  compute: {
+    gpuCount: number;
+    gpuUtilPercent: number;
+    cpuUtilPercent: number;
+    queueDepth: number;
+    p95LatencyMs: number;
+  };
+  tokenUsage: {
+    todayPromptTokens: number;
+    todayCompletionTokens: number;
+    todayCostUsd: number;
+    mtdCostUsd: number;
+    byAgent: { agentId: string; tokens: number; costUsd: number }[];
+  };
+  humanInTheLoop: {
+    pendingReviews: number;
+    approvedToday: number;
+    rejectedToday: number;
+    avgReviewSeconds: number;
+  };
+  alarms: OpsAlarm[];
+};
+
+export type OpsHistoryPoint = {
+  date: string;
+  gpuUtilPercent: number;
+  tokenCostUsd: number;
+  humanOverrides: number;
+  alarmCount: number;
 };

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { PageHeader } from "@/components/BrandLogo";
+import { AiBadge } from "@/components/AiBadge";
 import { Badge, Card } from "@/components/ui";
 import { getModelName } from "@/lib/data";
 import { useI18n } from "@/lib/i18n/context";
@@ -54,6 +55,11 @@ export function MarketClient({
         </Card>
 
         <Card title={t.market.ontology}>
+          <p className="mb-2 text-xs text-[var(--text-muted)]">
+            <a href="/ontology" className="text-accent">
+              {t.ontology.title} →
+            </a>
+          </p>
           <ul className="space-y-2 text-sm">
             {ontology.map((o) => (
               <li key={o.id} className="rounded border border-zinc-100 p-2">
@@ -89,7 +95,10 @@ export function MarketClient({
                   <tr key={d.modelId} className="border-b border-zinc-50">
                     <td className="py-2 font-medium">{getModelName(d.modelId, locale)}</td>
                     <td>{d.baseline}</td>
-                    <td className="font-semibold text-[var(--primary)]">{d.adjusted}</td>
+                    <td className="font-semibold text-[var(--primary)]">
+                      {d.adjusted}{" "}
+                      <AiBadge rationale={d.aiRationale} rationaleZh={d.aiRationaleZh} confidence={d.confidence} />
+                    </td>
                     <td className={delta >= 0 ? "text-emerald-600" : "text-red-600"}>{delta >= 0 ? "+" : ""}{delta}</td>
                     <td className="text-zinc-600">{locale === "zh" ? d.signalZh : d.signal}</td>
                   </tr>
@@ -107,6 +116,7 @@ export function MarketClient({
               <div className="flex flex-wrap gap-2">
                 <Badge>{m.channel}</Badge>
                 <Badge tone={m.status === "live" ? "success" : m.status === "approved" ? "warn" : "default"}>{m.status}</Badge>
+                <AiBadge rationale={m.aiRationale} rationaleZh={m.aiRationaleZh} confidence={m.confidence} />
                 <span className="text-xs text-zinc-400">{getModelName(m.modelId, locale)}</span>
               </div>
               <p className="mt-1">{locale === "zh" ? m.messageZh : m.message}</p>

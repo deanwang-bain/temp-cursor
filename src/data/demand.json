@@ -1,12 +1,12 @@
 [
-  { "week": "2026-W32", "modelId": "nova-suv", "baseline": 820, "adjusted": 892, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
-  { "week": "2026-W32", "modelId": "pulse-sedan", "baseline": 640, "adjusted": 688, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
-  { "week": "2026-W32", "modelId": "spark-hatch", "baseline": 510, "adjusted": 548, "signal": "Heatwave test drives", "signalZh": "高温试驾激增" },
+  { "week": "2026-W32", "modelId": "nova-suv", "baseline": 820, "adjusted": 892, "signal": "EV tax extension", "signalZh": "购置税减免延长", "agentId": "agent-demand-forecaster", "confidence": 0.89, "aiRationale": "Adjusted +8.8% — tax policy entity linked to China SUV segment", "aiRationaleZh": "上调 8.8% — 购置税政策实体关联中国 SUV 细分市场" },
+  { "week": "2026-W32", "modelId": "pulse-sedan", "baseline": 640, "adjusted": 688, "signal": "EV tax extension", "signalZh": "购置税减免延长", "agentId": "agent-demand-forecaster", "confidence": 0.86, "aiRationale": "Adjusted +7.5% — same policy signal, sedan segment elasticity", "aiRationaleZh": "上调 7.5% — 同一政策信号，轿车细分弹性" },
+  { "week": "2026-W32", "modelId": "spark-hatch", "baseline": 510, "adjusted": 548, "signal": "Heatwave test drives", "signalZh": "高温试驾激增", "agentId": "agent-demand-forecaster", "confidence": 0.82, "aiRationale": "Adjusted +7.5% — urban heatwave news + test-drive proxy", "aiRationaleZh": "上调 7.5% — 城市高温新闻与试驾代理指标" },
   { "week": "2026-W32", "modelId": "ridge-cross", "baseline": 420, "adjusted": 425, "signal": "Stable", "signalZh": "平稳" },
   { "week": "2026-W32", "modelId": "apex-coupe", "baseline": 180, "adjusted": 178, "signal": "Stable", "signalZh": "平稳" },
-  { "week": "2026-W33", "modelId": "nova-suv", "baseline": 830, "adjusted": 905, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
-  { "week": "2026-W33", "modelId": "pulse-sedan", "baseline": 650, "adjusted": 702, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
-  { "week": "2026-W33", "modelId": "spark-hatch", "baseline": 520, "adjusted": 575, "signal": "Competitor pricing + heatwave", "signalZh": "竞品降价与高温试驾" },
-  { "week": "2026-W33", "modelId": "ridge-cross", "baseline": 425, "adjusted": 430, "signal": "EU passport prep", "signalZh": "欧盟护照准备" },
+  { "week": "2026-W33", "modelId": "nova-suv", "baseline": 830, "adjusted": 905, "signal": "EV tax extension", "signalZh": "购置税减免延长", "agentId": "agent-demand-forecaster", "confidence": 0.9, "aiRationale": "Adjusted +9.0% — sustained policy boost", "aiRationaleZh": "上调 9.0% — 政策利好持续" },
+  { "week": "2026-W33", "modelId": "pulse-sedan", "baseline": 650, "adjusted": 702, "signal": "EV tax extension", "signalZh": "购置税减免延长", "agentId": "agent-demand-forecaster", "confidence": 0.87, "aiRationale": "Adjusted +8.0% — tax extension + sedan mix", "aiRationaleZh": "上调 8.0% — 减税延续与轿车组合" },
+  { "week": "2026-W33", "modelId": "spark-hatch", "baseline": 520, "adjusted": 575, "signal": "Competitor pricing + heatwave", "signalZh": "竞品降价与高温试驾", "agentId": "agent-demand-forecaster", "confidence": 0.87, "aiRationale": "Adjusted +10.6% — 2 news signals + competitor price pressure (conf. 0.87)", "aiRationaleZh": "上调 10.6% — 命中 2 条新闻信号与竞品价格压力（置信度 0.87）" },
+  { "week": "2026-W33", "modelId": "ridge-cross", "baseline": 425, "adjusted": 430, "signal": "EU passport prep", "signalZh": "欧盟护照准备", "agentId": "agent-demand-forecaster", "confidence": 0.75, "aiRationale": "Adjusted +1.2% — EU compliance prep, export batch timing", "aiRationaleZh": "上调 1.2% — 欧盟合规准备与出口批次时序" },
   { "week": "2026-W33", "modelId": "apex-coupe", "baseline": 175, "adjusted": 172, "signal": "Stable", "signalZh": "平稳" }
 ]

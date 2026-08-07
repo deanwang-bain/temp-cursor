@@ -1,0 +1,9 @@
+[
+  { "date": "2026-08-01", "gpuUtilPercent": 58, "tokenCostUsd": 16.2, "humanOverrides": 3, "alarmCount": 1 },
+  { "date": "2026-08-02", "gpuUtilPercent": 61, "tokenCostUsd": 17.8, "humanOverrides": 2, "alarmCount": 0 },
+  { "date": "2026-08-03", "gpuUtilPercent": 55, "tokenCostUsd": 14.5, "humanOverrides": 4, "alarmCount": 2 },
+  { "date": "2026-08-04", "gpuUtilPercent": 64, "tokenCostUsd": 19.1, "humanOverrides": 1, "alarmCount": 1 },
+  { "date": "2026-08-05", "gpuUtilPercent": 59, "tokenCostUsd": 15.9, "humanOverrides": 5, "alarmCount": 0 },
+  { "date": "2026-08-06", "gpuUtilPercent": 67, "tokenCostUsd": 21.3, "humanOverrides": 2, "alarmCount": 1 },
+  { "date": "2026-08-07", "gpuUtilPercent": 62.5, "tokenCostUsd": 18.62, "humanOverrides": 3, "alarmCount": 2 }
+]

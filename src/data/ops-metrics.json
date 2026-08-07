@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-08-07T11:20:00Z",
+  "compute": {
+    "gpuCount": 4,
+    "gpuUtilPercent": 62.5,
+    "cpuUtilPercent": 38.1,
+    "queueDepth": 3,
+    "p95LatencyMs": 840
+  },
+  "tokenUsage": {
+    "todayPromptTokens": 182000,
+    "todayCompletionTokens": 41000,
+    "todayCostUsd": 18.62,
+    "mtdCostUsd": 214.3,
+    "byAgent": [
+      { "agentId": "agent-marketing-copywriter", "tokens": 96000, "costUsd": 9.1 },
+      { "agentId": "agent-orchestrator-market", "tokens": 51000, "costUsd": 6.2 },
+      { "agentId": "agent-knowledge-assistant", "tokens": 38000, "costUsd": 2.0 },
+      { "agentId": "agent-root-cause-analyst", "tokens": 28000, "costUsd": 1.32 }
+    ]
+  },
+  "humanInTheLoop": {
+    "pendingReviews": 2,
+    "approvedToday": 9,
+    "rejectedToday": 1,
+    "avgReviewSeconds": 47
+  },
+  "alarms": [
+    {
+      "id": "alarm-001",
+      "openedAt": "2026-08-07T09:52:00Z",
+      "severity": "warn",
+      "module": "suppliers",
+      "agentId": "agent-supplier-risk",
+      "title": "Confidence drift on sup-inverter flag",
+      "titleZh": "sup-inverter 标记置信度漂移",
+      "detail": "Model confidence dropped from 0.91 to 0.68 over 7 days",
+      "detailZh": "模型置信度 7 天内从 0.91 降至 0.68",
+      "resolvedBy": "human",
+      "resolvedAt": "2026-08-07T10:15:00Z"
+    },
+    {
+      "id": "alarm-002",
+      "openedAt": "2026-08-07T11:05:00Z",
+      "severity": "critical",
+      "module": "mes",
+      "title": "Station st-50 alarm unresolved > 15min",
+      "titleZh": "st-50 工位报警超 15 分钟未处理",
+      "detail": "HV isolation test alarm requires human ack",
+      "detailZh": "高压绝缘测试报警需人工确认"
+    }
+  ]
+}

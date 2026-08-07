@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { I18nProvider } from "@/lib/i18n/context";
 import { ChatProvider } from "@/lib/chat-context";
+import { PlatformLayerProvider } from "@/lib/platform-layer-context";
 import { AppShell } from "@/components/AppShell";
 import "./globals.css";
 
@@ -15,7 +16,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <I18nProvider>
           <ChatProvider>
-            <AppShell>{children}</AppShell>
+            <PlatformLayerProvider>
+              <AppShell>{children}</AppShell>
+            </PlatformLayerProvider>
           </ChatProvider>
         </I18nProvider>
       </body>
