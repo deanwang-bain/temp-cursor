@@ -1,0 +1,72 @@
+[
+  {
+    "id": "sup-battery",
+    "name": "LithiumTech Modules Co.",
+    "nameZh": "锂Tech模组有限公司",
+    "category": "Battery modules",
+    "categoryZh": "电池模组",
+    "otifPercent": 91.2,
+    "quantityIssueCount": 4,
+    "lastIssueDate": "2026-07-18",
+    "flagged": true,
+    "flagReason": "3 short-shipments in 90 days on module pack SKU LT-48",
+    "flagReasonZh": "90天内 LT-48 模组三次短装",
+    "parts": ["Battery module pack", "BMS harness"]
+  },
+  {
+    "id": "sup-seats",
+    "name": "ComfortSeat Automotive",
+    "nameZh": "舒适座椅汽车",
+    "category": "Seating",
+    "categoryZh": "座椅",
+    "otifPercent": 96.8,
+    "quantityIssueCount": 0,
+    "lastIssueDate": "",
+    "flagged": false,
+    "flagReason": "",
+    "flagReasonZh": "",
+    "parts": ["Front seat assembly", "Rear bench"]
+  },
+  {
+    "id": "sup-inverter",
+    "name": "DriveCore Electronics",
+    "nameZh": "驱动芯电子",
+    "category": "Power electronics",
+    "categoryZh": "电力电子",
+    "otifPercent": 88.5,
+    "quantityIssueCount": 6,
+    "lastIssueDate": "2026-08-02",
+    "flagged": true,
+    "flagReason": "Repeated quantity variance >5% on inverter unit DC-400",
+    "flagReasonZh": "DC-400 逆变器数量差异反复超过5%",
+    "parts": ["Traction inverter", "DC-DC converter"]
+  },
+  {
+    "id": "sup-glass",
+    "name": "ClearView Glazing",
+    "nameZh": "明视玻璃",
+    "category": "Glass & trim",
+    "categoryZh": "玻璃与饰件",
+    "otifPercent": 94.1,
+    "quantityIssueCount": 1,
+    "lastIssueDate": "2026-05-12",
+    "flagged": false,
+    "flagReason": "",
+    "flagReasonZh": "",
+    "parts": ["Panoramic roof glass"]
+  },
+  {
+    "id": "sup-fasteners",
+    "name": "PrecisionBolt Industrial",
+    "nameZh": "精螺栓工业",
+    "category": "Fasteners",
+    "categoryZh": "紧固件",
+    "otifPercent": 97.5,
+    "quantityIssueCount": 2,
+    "lastIssueDate": "2026-06-22",
+    "flagged": false,
+    "flagReason": "",
+    "flagReasonZh": "",
+    "parts": ["Chassis bolt kit", "HV isolation hardware"]
+  }
+]

@@ -1,0 +1,8 @@
+[
+  { "id": "st-10", "name": "Body join", "nameZh": "车身合装", "status": "running", "cycleSec": 118, "defects": 1 },
+  { "id": "st-20", "name": "Battery mount", "nameZh": "电池安装", "status": "running", "cycleSec": 95, "defects": 0 },
+  { "id": "st-30", "name": "Powertrain", "nameZh": "动力总成", "status": "running", "cycleSec": 102, "defects": 2 },
+  { "id": "st-40", "name": "Final assembly", "nameZh": "总装", "status": "running", "cycleSec": 88, "defects": 1 },
+  { "id": "st-50", "name": "EOL test", "nameZh": "下线检测", "status": "alarm", "cycleSec": 145, "defects": 3 },
+  { "id": "st-60", "name": "Quality gate", "nameZh": "质量门", "status": "running", "cycleSec": 62, "defects": 0 }
+]

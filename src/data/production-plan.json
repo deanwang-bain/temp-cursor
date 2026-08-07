@@ -1,0 +1,82 @@
+[
+  {
+    "id": "slot-1",
+    "date": "2026-08-07",
+    "shift": "A",
+    "modelId": "nova-suv",
+    "units": 112,
+    "changeoverBeforeMin": 0,
+    "staffRequired": 48,
+    "note": "Continuing run from previous shift",
+    "noteZh": "延续上一班次生产"
+  },
+  {
+    "id": "slot-2",
+    "date": "2026-08-07",
+    "shift": "B",
+    "modelId": "nova-suv",
+    "units": 108,
+    "changeoverBeforeMin": 0,
+    "staffRequired": 46
+  },
+  {
+    "id": "slot-3",
+    "date": "2026-08-07",
+    "shift": "C",
+    "modelId": "pulse-sedan",
+    "units": 95,
+    "changeoverBeforeMin": 28,
+    "staffRequired": 44,
+    "note": "Changeover Nova→Pulse, tooling swap 28 min",
+    "noteZh": "换型 Nova→Pulse，工装切换28分钟"
+  },
+  {
+    "id": "slot-4",
+    "date": "2026-08-08",
+    "shift": "A",
+    "modelId": "pulse-sedan",
+    "units": 118,
+    "changeoverBeforeMin": 0,
+    "staffRequired": 45
+  },
+  {
+    "id": "slot-5",
+    "date": "2026-08-08",
+    "shift": "B",
+    "modelId": "spark-hatch",
+    "units": 102,
+    "changeoverBeforeMin": 22,
+    "staffRequired": 42,
+    "note": "Demand uplift from market signals",
+    "noteZh": "市场需求信号上调产量"
+  },
+  {
+    "id": "slot-6",
+    "date": "2026-08-08",
+    "shift": "C",
+    "modelId": "spark-hatch",
+    "units": 98,
+    "changeoverBeforeMin": 0,
+    "staffRequired": 41
+  },
+  {
+    "id": "slot-7",
+    "date": "2026-08-09",
+    "shift": "A",
+    "modelId": "ridge-cross",
+    "units": 88,
+    "changeoverBeforeMin": 25,
+    "staffRequired": 43
+  },
+  {
+    "id": "slot-8",
+    "date": "2026-08-09",
+    "shift": "B",
+    "modelId": "apex-coupe",
+    "units": 52,
+    "changeoverBeforeMin": 32,
+    "staffRequired": 38,
+    "note": "Low volume performance mix",
+    "noteZh": "小批量性能车型混线"
+  }
+]

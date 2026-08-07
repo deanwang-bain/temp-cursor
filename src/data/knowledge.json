@@ -1,0 +1,52 @@
+[
+  {
+    "id": "kb-001",
+    "title": "Mixed-model line changeover SOP",
+    "titleZh": "混线换型标准作业",
+    "category": "Production",
+    "categoryZh": "生产",
+    "content": "Standard changeover sequence: clear line → swap tooling cart → verify torque recipes → run 3 golden units before full rate. Typical times: Spark 20 min, Pulse 22 min, Nova 28 min, Ridge 25 min, Apex 32 min.",
+    "contentZh": "标准换型顺序：清线 → 更换工装车 → 验证扭矩配方 → 试跑3台金样后全速。典型时间：Spark 20分、Pulse 22分、Nova 28分、Ridge 25分、Apex 32分。",
+    "tags": ["changeover", "SOP", "mixed-model"]
+  },
+  {
+    "id": "kb-002",
+    "title": "OEE calculation on Line 1",
+    "titleZh": "1号线 OEE 计算方法",
+    "category": "MES",
+    "categoryZh": "MES",
+    "content": "OEE = Availability × Performance × Quality. Availability excludes planned maintenance. Performance compares actual VPH to model-specific target. Quality uses FTT from quality gate station st-60.",
+    "contentZh": "OEE = 可用率 × 性能率 × 质量率。可用率不含计划维护。性能率对比实际 VPH 与车型目标。质量率采用 st-60 质量门 FTT。",
+    "tags": ["OEE", "MES", "metrics"]
+  },
+  {
+    "id": "kb-003",
+    "title": "HV isolation test troubleshooting",
+    "titleZh": "高压绝缘测试故障排查",
+    "category": "Quality",
+    "categoryZh": "质量",
+    "content": "If EOL-HV tests fail intermittently, check inverter harness torque at st-30, verify supplier batch on DC-400 inverter, and inspect isolation washer seating.",
+    "contentZh": "若 EOL-HV 测试间歇失败，检查 st-30 逆变器线束扭矩、DC-400 批次及隔离垫圈安装。",
+    "tags": ["quality", "EOL", "HV"]
+  },
+  {
+    "id": "kb-004",
+    "title": "Supplier quantity issue escalation",
+    "titleZh": "供应商数量异常升级流程",
+    "category": "Supply chain",
+    "categoryZh": "供应链",
+    "content": "Auto-flag when OTIF <92% or 3+ quantity variances in 90 days. Purchasing opens CAPA; production plan receives alternate source options within 48h.",
+    "contentZh": "OTIF<92% 或 90 天内 3 次数量差异自动标记。采购开启 CAPA；48 小时内提供备选货源。",
+    "tags": ["supplier", "OTIF", "CAPA"]
+  },
+  {
+    "id": "kb-005",
+    "title": "Demand signal to production plan flow",
+    "titleZh": "需求信号到生产计划流程",
+    "category": "Planning",
+    "categoryZh": "计划",
+    "content": "Ontology-processed news adjusts weekly demand forecast. Planner auto-run optimises mix on single line considering changeover matrix, holidays, and staffing caps per shift (max 48 FTE shift A).",
+    "contentZh": "本体处理新闻后调整周需求预测。计划自动运行优化单线 mix，考虑换型矩阵、假日与各班次人力上限（A班最多48人）。",
+    "tags": ["demand", "planning", "APS"]
+  }
+]

@@ -1,0 +1,5 @@
+[
+  { "date": "2026-08-10", "name": "Q3 maintenance window", "nameZh": "三季度维护窗口", "impact": "reduced" },
+  { "date": "2026-08-15", "name": "Regional holiday", "nameZh": "地区性假日", "impact": "closed" },
+  { "date": "2026-09-01", "name": "Factory training day", "nameZh": "工厂培训日", "impact": "reduced" }
+]

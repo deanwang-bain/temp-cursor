@@ -1,0 +1,79 @@
+[
+  {
+    "id": "policy-ev-subsidy",
+    "type": "policy",
+    "label": "EV purchase tax exemption",
+    "labelZh": "新能源汽车购置税减免",
+    "relations": [{ "targetId": "market-china", "relation": "boosts demand in", "relationZh": "提振需求于" }]
+  },
+  {
+    "id": "market-china",
+    "type": "market",
+    "label": "China domestic market",
+    "labelZh": "中国国内市场",
+    "relations": [{ "targetId": "nova-suv", "relation": "favours", "relationZh": "利好" }]
+  },
+  {
+    "id": "market-urban",
+    "type": "market",
+    "label": "Urban tier-1/2 cities",
+    "labelZh": "一线/二线城市",
+    "relations": [{ "targetId": "spark-hatch", "relation": "primary for", "relationZh": "主要市场" }]
+  },
+  {
+    "id": "competitor-x",
+    "type": "competitor",
+    "label": "Competitor X Motors",
+    "labelZh": "X 竞品车企",
+    "relations": [{ "targetId": "spark-hatch", "relation": "price pressure on", "relationZh": "价格压力" }]
+  },
+  {
+    "id": "nova-suv",
+    "type": "model",
+    "label": "Nova SUV",
+    "labelZh": "Nova SUV",
+    "relations": []
+  },
+  {
+    "id": "pulse-sedan",
+    "type": "model",
+    "label": "Pulse Sedan",
+    "labelZh": "Pulse Sedan",
+    "relations": []
+  },
+  {
+    "id": "spark-hatch",
+    "type": "model",
+    "label": "Spark Hatch",
+    "labelZh": "Spark Hatch",
+    "relations": []
+  },
+  {
+    "id": "tech-battery",
+    "type": "technology",
+    "label": "Lithium-ion battery pack",
+    "labelZh": "锂离子电池包",
+    "relations": [{ "targetId": "supplier-battery-module", "relation": "supplied by", "relationZh": "供应商" }]
+  },
+  {
+    "id": "supplier-battery-module",
+    "type": "demand_driver",
+    "label": "Battery module supply",
+    "labelZh": "电池模组供应",
+    "relations": []
+  },
+  {
+    "id": "policy-eu",
+    "type": "policy",
+    "label": "EU battery passport",
+    "labelZh": "欧盟电池护照",
+    "relations": [{ "targetId": "ridge-cross", "relation": "compliance for", "relationZh": "合规要求" }]
+  },
+  {
+    "id": "ridge-cross",
+    "type": "model",
+    "label": "Ridge Cross",
+    "labelZh": "Ridge Cross",
+    "relations": []
+  }
+]

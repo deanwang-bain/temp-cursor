@@ -1,0 +1,12 @@
+[
+  { "week": "2026-W32", "modelId": "nova-suv", "baseline": 820, "adjusted": 892, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
+  { "week": "2026-W32", "modelId": "pulse-sedan", "baseline": 640, "adjusted": 688, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
+  { "week": "2026-W32", "modelId": "spark-hatch", "baseline": 510, "adjusted": 548, "signal": "Heatwave test drives", "signalZh": "高温试驾激增" },
+  { "week": "2026-W32", "modelId": "ridge-cross", "baseline": 420, "adjusted": 425, "signal": "Stable", "signalZh": "平稳" },
+  { "week": "2026-W32", "modelId": "apex-coupe", "baseline": 180, "adjusted": 178, "signal": "Stable", "signalZh": "平稳" },
+  { "week": "2026-W33", "modelId": "nova-suv", "baseline": 830, "adjusted": 905, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
+  { "week": "2026-W33", "modelId": "pulse-sedan", "baseline": 650, "adjusted": 702, "signal": "EV tax extension", "signalZh": "购置税减免延长" },
+  { "week": "2026-W33", "modelId": "spark-hatch", "baseline": 520, "adjusted": 575, "signal": "Competitor pricing + heatwave", "signalZh": "竞品降价与高温试驾" },
+  { "week": "2026-W33", "modelId": "ridge-cross", "baseline": 425, "adjusted": 430, "signal": "EU passport prep", "signalZh": "欧盟护照准备" },
+  { "week": "2026-W33", "modelId": "apex-coupe", "baseline": 175, "adjusted": 172, "signal": "Stable", "signalZh": "平稳" }
+]

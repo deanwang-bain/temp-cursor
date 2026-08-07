@@ -1,0 +1,60 @@
+[
+  {
+    "id": "qi-101",
+    "openedAt": "2026-08-07T09:45:00Z",
+    "stationId": "st-50",
+    "modelId": "nova-suv",
+    "defectCode": "EOL-HV-042",
+    "defectDesc": "HV isolation test intermittent fail",
+    "defectDescZh": "高压绝缘测试间歇性失败",
+    "severity": "major",
+    "status": "investigating",
+    "rootCause": "Suspected inverter harness torque drift at station 30",
+    "rootCauseZh": "怀疑30工位逆变器线束扭矩漂移",
+    "supplierId": "sup-inverter",
+    "correctiveAction": "Lock torque recipe; 100% audit on next 50 units",
+    "correctiveActionZh": "锁定扭矩配方；下50台100%复检"
+  },
+  {
+    "id": "qi-102",
+    "openedAt": "2026-08-06T14:20:00Z",
+    "stationId": "st-20",
+    "modelId": "pulse-sedan",
+    "defectCode": "BAT-ALIGN-017",
+    "defectDesc": "Battery pack alignment out of spec +1.2mm",
+    "defectDescZh": "电池包对齐超差 +1.2mm",
+    "severity": "minor",
+    "status": "closed",
+    "rootCause": "Fixture wear on lift pad LP-3",
+    "rootCauseZh": "LP-3 升降垫块磨损",
+    "correctiveAction": "Replace pad; add weekly gauge check",
+    "correctiveActionZh": "更换垫块；增加每周检具检查"
+  },
+  {
+    "id": "qi-103",
+    "openedAt": "2026-08-05T07:10:00Z",
+    "stationId": "st-40",
+    "modelId": "spark-hatch",
+    "defectCode": "TRIM-GAP-008",
+    "defectDesc": "Door trim gap exceeds visual standard",
+    "defectDescZh": "门饰板间隙超外观标准",
+    "severity": "minor",
+    "status": "open"
+  },
+  {
+    "id": "qi-104",
+    "openedAt": "2026-08-04T16:55:00Z",
+    "stationId": "st-30",
+    "modelId": "ridge-cross",
+    "defectCode": "INV-QTY-003",
+    "defectDesc": "Inverter serial mismatch vs BOM",
+    "defectDescZh": "逆变器序列号与BOM不符",
+    "severity": "critical",
+    "status": "investigating",
+    "rootCause": "Supplier short-shipment substituted alternate batch",
+    "rootCauseZh": "供应商短装替换批次",
+    "supplierId": "sup-inverter",
+    "correctiveAction": "Quarantine batch; supplier CAPA requested",
+    "correctiveActionZh": "隔离批次；要求供应商CAPA"
+  }
+]

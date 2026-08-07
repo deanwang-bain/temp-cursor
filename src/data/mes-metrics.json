@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-08-07T11:20:00Z",
+  "oee": 78.4,
+  "availability": 92.1,
+  "performance": 89.6,
+  "quality": 95.2,
+  "ftt": 94.8,
+  "vph": 27.6,
+  "targetVph": 30,
+  "unitsToday": 412,
+  "currentModelId": "nova-suv",
+  "shift": "A"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "news-001",
+    "publishedAt": "2026-08-05T08:15:00Z",
+    "source": "Reuters",
+    "title": "China extends EV purchase tax exemption through 2027",
+    "titleZh": "中国延长新能源汽车购置税减免至2027年",
+    "summary": "Policy extension expected to lift Q4 demand for mid-size and compact EVs in tier-1 and tier-2 cities.",
+    "summaryZh": "政策延长预计将提振一至二线城市四季度中型与紧凑级纯电需求。",
+    "sentiment": "positive",
+    "entities": ["policy-ev-subsidy", "market-china", "nova-suv", "pulse-sedan"],
+    "processed": true
+  },
+  {
+    "id": "news-002",
+    "publishedAt": "2026-08-05T10:42:00Z",
+    "source": "Bloomberg",
+    "title": "Rival automaker slashes compact EV prices by 8%",
+    "titleZh": "竞品车企下调紧凑级纯电售价8%",
+    "summary": "Aggressive pricing on city hatchbacks may pressure Spark segment share in urban markets.",
+    "summaryZh": "城市两厢细分市场竞争加剧，Spark 市占或承压。",
+    "sentiment": "negative",
+    "entities": ["competitor-x", "spark-hatch", "market-urban"],
+    "processed": true
+  },
+  {
+    "id": "news-003",
+    "publishedAt": "2026-08-06T06:30:00Z",
+    "source": "Caixin",
+    "title": "Battery-grade lithium carbonate stabilises after 18-month decline",
+    "titleZh": "电池级碳酸锂价格企稳，结束18个月下跌",
+    "summary": "Input cost stability supports margin recovery; supply chain risk downgraded for Q3.",
+    "summaryZh": "原材料成本趋稳，三季度供应链风险下调。",
+    "sentiment": "positive",
+    "entities": ["tech-battery", "supplier-battery-module"],
+    "processed": true
+  },
+  {
+    "id": "news-004",
+    "publishedAt": "2026-08-06T14:05:00Z",
+    "source": "Industry Week",
+    "title": "EU tightens battery passport traceability for imported EVs",
+    "titleZh": "欧盟收紧进口电动车电池护照追溯要求",
+    "summary": "Export-bound Ridge Cross and Nova SUV variants require enhanced cell genealogy documentation.",
+    "summaryZh": "出口版 Ridge Cross 与 Nova SUV 需加强电芯谱系文件。",
+    "sentiment": "neutral",
+    "entities": ["policy-eu", "ridge-cross", "nova-suv"],
+    "processed": false
+  },
+  {
+    "id": "news-005",
+    "publishedAt": "2026-08-07T09:20:00Z",
+    "source": "Local media",
+    "title": "Heatwave drives surge in test-drive bookings for compact EVs",
+    "titleZh": "高温推动紧凑级纯电试驾预约激增",
+    "summary": "Dealer networks report 15% week-on-week increase in urban compact segment interest.",
+    "summaryZh": "经销商反馈城市紧凑级兴趣周环比增15%。",
+    "sentiment": "positive",
+    "entities": ["market-urban", "spark-hatch", "pulse-sedan"],
+    "processed": false
+  }
+]
