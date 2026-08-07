@@ -92,7 +92,7 @@
   {
     "id": "agent-aps-planner",
     "name": "APS Planning Agent",
-    "nameZh": "APS 排程智能体",
+    "nameZh": "高级排程智能体",
     "role": "Refreshes mixed-line schedule on demand signals",
     "roleZh": "根据需求信号刷新混线排程",
     "module": "planning",
@@ -113,7 +113,7 @@
     },
     "guardrails": { "maxAutonomyLevel": 3, "escalateBelowConfidence": 0.65 },
     "lifecycle": [
-      { "at": "2026-01-10T00:00:00Z", "type": "invented", "note": "Integrated with existing APS UI", "noteZh": "嵌入现有 APS 界面", "actor": "human" }
+      { "at": "2026-01-10T00:00:00Z", "type": "invented", "note": "Integrated with existing APS UI", "noteZh": "嵌入现有高级排程界面", "actor": "human" }
     ]
   },
   {
@@ -121,7 +121,7 @@
     "name": "Supplier Risk Agent",
     "nameZh": "供应商风险智能体",
     "role": "Flags OTIF / quantity anomalies",
-    "roleZh": "识别 OTIF 与数量异常",
+    "roleZh": "识别准时足量交付与数量异常",
     "module": "suppliers",
     "teamId": "team-supply-chain",
     "modelType": "traditional_ml",
@@ -178,7 +178,7 @@
     "name": "Knowledge Assistant Agent",
     "nameZh": "知识助手智能体",
     "role": "Answers training questions from corpus + optional LLM",
-    "roleZh": "基于知识库与可选 LLM 回答培训问题",
+    "roleZh": "基于知识库与可选大语言模型回答培训问题",
     "module": "knowledge",
     "teamId": "team-knowledge",
     "modelType": "llm",
@@ -197,7 +197,7 @@
     },
     "guardrails": { "maxAutonomyLevel": 2, "escalateBelowConfidence": 0.7 },
     "lifecycle": [
-      { "at": "2026-05-01T00:00:00Z", "type": "invented", "note": "Demo mode by default; ChatGPT when API key set", "noteZh": "默认演示模式；配置 API Key 后启用 ChatGPT", "actor": "human" }
+      { "at": "2026-05-01T00:00:00Z", "type": "invented", "note": "Demo mode by default; ChatGPT when API key set", "noteZh": "默认使用演示模式；配置访问密钥后启用智能模型", "actor": "human" }
     ]
   },
   {
@@ -225,7 +225,7 @@
     },
     "guardrails": { "maxAutonomyLevel": 2, "escalateBelowConfidence": 0.75 },
     "lifecycle": [
-      { "at": "2025-11-01T00:00:00Z", "type": "invented", "note": "First-gen NER pipeline", "noteZh": "第一代 NER 流水线", "actor": "human" },
+      { "at": "2025-11-01T00:00:00Z", "type": "invented", "note": "First-gen NER pipeline", "noteZh": "第一代命名实体识别流水线", "actor": "human" },
       { "at": "2026-06-15T00:00:00Z", "type": "retired", "note": "Retired after drift exceeded threshold twice; replaced by hybrid extractor", "noteZh": "漂移两次超阈值后退役，由混合抽取智能体接替", "actor": "human" }
     ]
   }

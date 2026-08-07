@@ -1,6 +1,6 @@
 import { OntologyClient } from "./OntologyClient";
-import { getOntology, getOntologySources } from "@/lib/data";
+import { getOntology, getOntologyHistory, getOntologySources } from "@/lib/data";
 
 export default function OntologyPage() {
-  return <OntologyClient ontology={getOntology()} sources={getOntologySources()} />;
+  return <OntologyClient ontology={getOntology()} sources={getOntologySources()} history={getOntologyHistory()} />;
 }

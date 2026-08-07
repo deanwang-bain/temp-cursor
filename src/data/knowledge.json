@@ -6,17 +6,17 @@
     "category": "Production",
     "categoryZh": "生产",
     "content": "Standard changeover sequence: clear line → swap tooling cart → verify torque recipes → run 3 golden units before full rate. Typical times: Spark 20 min, Pulse 22 min, Nova 28 min, Ridge 25 min, Apex 32 min.",
-    "contentZh": "标准换型顺序：清线 → 更换工装车 → 验证扭矩配方 → 试跑3台金样后全速。典型时间：Spark 20分、Pulse 22分、Nova 28分、Ridge 25分、Apex 32分。",
+    "contentZh": "标准换型顺序：清线 → 更换工装车 → 验证扭矩配方 → 试跑3台金样后全速。典型时间：火花车型20分钟、脉冲车型22分钟、星云车型28分钟、山脊车型25分钟、巅峰车型32分钟。",
     "tags": ["changeover", "SOP", "mixed-model"]
   },
   {
     "id": "kb-002",
     "title": "OEE calculation on Line 1",
-    "titleZh": "1号线 OEE 计算方法",
+    "titleZh": "1号线综合设备效率计算方法",
     "category": "MES",
-    "categoryZh": "MES",
+    "categoryZh": "制造执行",
     "content": "OEE = Availability × Performance × Quality. Availability excludes planned maintenance. Performance compares actual VPH to model-specific target. Quality uses FTT from quality gate station st-60.",
-    "contentZh": "OEE = 可用率 × 性能率 × 质量率。可用率不含计划维护。性能率对比实际 VPH 与车型目标。质量率采用 st-60 质量门 FTT。",
+    "contentZh": "综合设备效率等于可用率、性能率与质量率的乘积。可用率不含计划维护。性能率对比实际每小时产量与车型目标。质量率采用六十号工位质量门的一次通过率。",
     "tags": ["OEE", "MES", "metrics"]
   },
   {
@@ -26,7 +26,7 @@
     "category": "Quality",
     "categoryZh": "质量",
     "content": "If EOL-HV tests fail intermittently, check inverter harness torque at st-30, verify supplier batch on DC-400 inverter, and inspect isolation washer seating.",
-    "contentZh": "若 EOL-HV 测试间歇失败，检查 st-30 逆变器线束扭矩、DC-400 批次及隔离垫圈安装。",
+    "contentZh": "若下线高压测试间歇失败，检查三十号工位逆变器线束扭矩、指定逆变器批次及隔离垫圈安装。",
     "tags": ["quality", "EOL", "HV"]
   },
   {
@@ -36,7 +36,7 @@
     "category": "Supply chain",
     "categoryZh": "供应链",
     "content": "Auto-flag when OTIF <92% or 3+ quantity variances in 90 days. Purchasing opens CAPA; production plan receives alternate source options within 48h.",
-    "contentZh": "OTIF<92% 或 90 天内 3 次数量差异自动标记。采购开启 CAPA；48 小时内提供备选货源。",
+    "contentZh": "准时足量交付率低于百分之九十二，或九十天内出现三次数量差异时自动标记。采购启动纠正预防措施；四十八小时内提供备选货源。",
     "tags": ["supplier", "OTIF", "CAPA"]
   },
   {
@@ -46,7 +46,7 @@
     "category": "Planning",
     "categoryZh": "计划",
     "content": "Ontology-processed news adjusts weekly demand forecast. Planner auto-run optimises mix on single line considering changeover matrix, holidays, and staffing caps per shift (max 48 FTE shift A).",
-    "contentZh": "本体处理新闻后调整周需求预测。计划自动运行优化单线 mix，考虑换型矩阵、假日与各班次人力上限（A班最多48人）。",
+    "contentZh": "本体处理新闻后调整周需求预测。计划自动运行并优化单线车型组合，考虑换型矩阵、假日与各班次人力上限（甲班最多四十八人）。",
     "tags": ["demand", "planning", "APS"]
   }
 ]

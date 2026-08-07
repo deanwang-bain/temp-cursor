@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
+import { KnowledgeChatCallout } from "@/components/KnowledgeChatCallout";
 import { OpsStatusDot } from "@/components/OpsStatusDot";
 import { useI18n } from "@/lib/i18n/context";
 import { usePlatformLayer } from "@/lib/platform-layer-context";
@@ -15,7 +16,6 @@ const navItems = [
   { href: "/suppliers", key: "suppliers" as const, icon: "◎" },
   { href: "/mes", key: "mes" as const, icon: "▣" },
   { href: "/quality", key: "quality" as const, icon: "◈" },
-  { href: "/knowledge", key: "knowledge" as const, icon: "?" },
 ];
 
 const platformNavItems = [
@@ -142,6 +142,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>
+      <KnowledgeChatCallout key={locale} />
     </div>
   );
 }

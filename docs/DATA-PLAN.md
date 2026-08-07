@@ -11,6 +11,8 @@ Synthetic data supports an **end-to-end narrative**:
 5. Quality issues trace to root cause and suppliers (TQM)
 6. Knowledge base feeds training + chatbot
 
+All time-series datasets contain observed rows followed by at least two synthetic prediction rows marked with `isForecast: true`. Forecasts are illustrative scenario data, not model output. Dashboard dimensional explorers aggregate the same facts and support drill-down with breadcrumb roll-up.
+
 ## Real-world anchors (not company-specific)
 
 | Metric | Demo value | Industry reference |
@@ -31,12 +33,17 @@ Synthetic data supports an **end-to-end narrative**:
 | `demand.json` | Weekly baseline vs AI-adjusted units |
 | `marketing.json` | Triggered messages by channel |
 | `production-plan.json` | Shift schedule with changeovers & staff |
+| `production-history.json` | 7-week planned vs actual output, utilisation, and changeover history |
+| `personnel-plan.json` | Shift-level role demand, assigned headcount, required skills, and qualifications |
 | `holidays.json` | Plant calendar impacts |
 | `suppliers.json` | 5 suppliers, 2 flagged |
+| `supplier-history.json` | 6-month OTIF and quantity issue history by supplier |
 | `mes-metrics.json` | Live dashboard snapshot |
 | `mes-stations.json` | 6 stations, 1 alarm |
-| `mes-history.json` | 7-day trend |
+| `mes-history.json` | 7 observed days plus 2 predicted metric periods |
 | `quality-issues.json` | 4 issues, supplier links |
+| `quality-history.json` | 8-week defect severity, closure, and resolution-time history |
+| `ontology-history.json` | 8-week entity, relation, extraction, and resolution-rate history |
 | `knowledge.json` | 5 SOP / training articles |
 | `pipeline-events.json` | Cross-module event log for overview |
 

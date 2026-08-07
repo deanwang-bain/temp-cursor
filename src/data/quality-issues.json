@@ -22,7 +22,7 @@
     "modelId": "pulse-sedan",
     "defectCode": "BAT-ALIGN-017",
     "defectDesc": "Battery pack alignment out of spec +1.2mm",
-    "defectDescZh": "电池包对齐超差 +1.2mm",
+    "defectDescZh": "电池包对齐超差1.2毫米",
     "severity": "minor",
     "status": "closed",
     "rootCause": "Fixture wear on lift pad LP-3",
@@ -48,13 +48,13 @@
     "modelId": "ridge-cross",
     "defectCode": "INV-QTY-003",
     "defectDesc": "Inverter serial mismatch vs BOM",
-    "defectDescZh": "逆变器序列号与BOM不符",
+    "defectDescZh": "逆变器序列号与物料清单不符",
     "severity": "critical",
     "status": "investigating",
     "rootCause": "Supplier short-shipment substituted alternate batch",
     "rootCauseZh": "供应商短装替换批次",
     "supplierId": "sup-inverter",
     "correctiveAction": "Quarantine batch; supplier CAPA requested",
-    "correctiveActionZh": "隔离批次；要求供应商CAPA"
+    "correctiveActionZh": "隔离批次；要求供应商提交纠正预防措施"
   }
 ]

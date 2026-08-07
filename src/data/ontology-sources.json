@@ -4,11 +4,11 @@
     "headline": "China extends EV purchase tax exemption through 2027",
     "headlineZh": "中国延长新能源汽车购置税减免至2027年",
     "rawSnippet": "The Ministry of Finance confirmed EV purchase tax exemption will continue, boosting domestic demand especially for mid-size SUVs.",
-    "rawSnippetZh": "财政部确认新能源汽车购置税减免延续，尤其提振中型 SUV 国内需求。",
+    "rawSnippetZh": "财政部确认新能源汽车购置税减免延续，尤其提振中型运动型多用途车国内需求。",
     "extractions": [
       { "text": "EV purchase tax exemption", "textZh": "购置税减免", "type": "policy", "confidence": 0.96, "resolvedOntologyId": "policy-ev-subsidy" },
       { "text": "domestic demand", "textZh": "国内需求", "type": "market", "confidence": 0.88, "resolvedOntologyId": "market-china" },
-      { "text": "mid-size SUVs", "textZh": "中型 SUV", "type": "segment", "confidence": 0.79, "resolvedOntologyId": "nova-suv" }
+      { "text": "mid-size SUVs", "textZh": "中型运动型多用途车", "type": "segment", "confidence": 0.79, "resolvedOntologyId": "nova-suv" }
     ]
   },
   {
@@ -16,10 +16,10 @@
     "headline": "Heatwave drives urban test-drive surge for compact EVs",
     "headlineZh": "高温推动城市紧凑型纯电试驾激增",
     "rawSnippet": "Tier-1 cities report 12% more Spark Hatch test drives as competitors cut hatchback prices.",
-    "rawSnippetZh": "一线城市 Spark Hatch 试驾量增 12%，竞品 hatchback 降价施压。",
+    "rawSnippetZh": "一线城市火花纯电两厢车试驾量增长12%，竞品两厢车降价施压。",
     "extractions": [
       { "text": "Tier-1 cities", "textZh": "一线城市", "type": "market", "confidence": 0.91, "resolvedOntologyId": "market-urban" },
-      { "text": "Spark Hatch", "textZh": "Spark Hatch", "type": "model", "confidence": 0.98, "resolvedOntologyId": "spark-hatch" },
+      { "text": "Spark Hatch", "textZh": "火花纯电两厢车", "type": "model", "confidence": 0.98, "resolvedOntologyId": "spark-hatch" },
       { "text": "competitors cut prices", "textZh": "竞品降价", "type": "competitor", "confidence": 0.84, "resolvedOntologyId": "competitor-x" }
     ]
   },
@@ -28,10 +28,10 @@
     "headline": "EU battery passport rules tighten for crossovers",
     "headlineZh": "欧盟电池护照规则收紧，影响跨界车型",
     "rawSnippet": "New traceability requirements affect Ridge Cross export batches from Q4.",
-    "rawSnippetZh": "新追溯要求影响 Ridge Cross 四季度出口批次。",
+    "rawSnippetZh": "新追溯要求影响山脊纯电跨界车第四季度出口批次。",
     "extractions": [
       { "text": "battery passport", "textZh": "电池护照", "type": "policy", "confidence": 0.93, "resolvedOntologyId": "policy-eu" },
-      { "text": "Ridge Cross", "textZh": "Ridge Cross", "type": "model", "confidence": 0.97, "resolvedOntologyId": "ridge-cross" }
+      { "text": "Ridge Cross", "textZh": "山脊纯电跨界车", "type": "model", "confidence": 0.97, "resolvedOntologyId": "ridge-cross" }
     ]
   }
 ]

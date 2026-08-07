@@ -1,6 +1,6 @@
 # EV Manufacturing AI Demo
 
-A bilingual (English / 中文) web demo for integrated AI use cases across EV car manufacturing: market intelligence → production planning → suppliers → MES → TQM → knowledge & chatbot.
+A bilingual (English / 中文) web demo for integrated AI use cases across EV car manufacturing: market intelligence → production planning → suppliers → MES → TQM, with a knowledge and chat assistant available from every screen.
 
 ## Deploy
 
@@ -27,6 +27,13 @@ Reveal from the cover page (double-click hero or **View platform layer**) or the
 3. **Agents** — ML + LLM agents orchestrated across the pipeline
 4. **Ops** — parallel governance for compute, cost, and risk
 
+## Analytics interaction
+
+- Every quantitative dashboard includes a dimensional explorer with click-to-drill and breadcrumb roll-up.
+- Domain hierarchies include region → model → week, date → shift → model, category → supplier → month, and severity → station → model.
+- Time-series charts distinguish observed values from two synthetic prediction periods using dashed lines or faded forecast bars.
+- English and Chinese modes select locale-specific labels, statuses, units, product names, and generated report content without mixing UI languages.
+
 ## Local development
 
 ```bash
@@ -40,12 +47,13 @@ Open [http://localhost:3000](http://localhost:3000). Use the **中文 / EN** but
 
 | Module | Flow |
 |--------|------|
-| **Market & Demand** | News → ontology → demand forecast → marketing messages |
-| **Production Plan** | Demand-triggered APS, 5 EV models on one line, changeovers, staffing, holidays |
-| **Suppliers** | OTIF + auto-flagged quantity issues |
-| **MES** | Live OEE, FTT, VPH; editable overrides; station status; 7-day history; report export |
-| **TQM** | Defects → root cause → supplier linkage |
-| **Knowledge** | Training articles + rule-based assistant |
+| **Market & Demand** | News → ontology → demand forecast → marketing messages; six-week demand visualisation |
+| **Production Plan** | Demand-triggered APS, 5 EV models on one line, changeovers, staffing, role/skill/qualification coverage, holidays, plan-attainment history |
+| **Suppliers** | OTIF + auto-flagged quantity issues; six-month supplier trends and review actions |
+| **MES** | Live OEE, FTT, VPH; editable overrides; station status; 7-day visual history; report export |
+| **TQM** | Defects → root cause → supplier linkage; trends, escalation, assignment, closure, and 8D report actions |
+| **Global Knowledge & Chat** | Persistent callout with searchable training articles and rule-based/OpenAI assistant |
+| **Ontology** | Interactive entity relationship graph plus eight-week graph growth history |
 
 ## Synthetic data
 
@@ -61,7 +69,7 @@ See `docs/DATA-PLAN.md` for the full data dictionary.
 
 ## Chat assistant modes
 
-On **Knowledge & Chat**, switch between:
+Open **Knowledge & Chat** from the floating callout on any page, then switch between:
 
 - **Demo mode** — rule-based answers from the knowledge base (default, no API key)
 - **ChatGPT** — calls OpenAI using `OPENAI_API_KEY` on the server

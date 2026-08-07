@@ -1,0 +1,12 @@
+[
+  { "week": "W26", "entities": 58, "relations": 82, "extractions": 124, "resolutionRate": 84 },
+  { "week": "W27", "entities": 63, "relations": 91, "extractions": 138, "resolutionRate": 86 },
+  { "week": "W28", "entities": 69, "relations": 104, "extractions": 151, "resolutionRate": 87 },
+  { "week": "W29", "entities": 74, "relations": 115, "extractions": 163, "resolutionRate": 89 },
+  { "week": "W30", "entities": 82, "relations": 129, "extractions": 184, "resolutionRate": 91 },
+  { "week": "W31", "entities": 91, "relations": 146, "extractions": 207, "resolutionRate": 92 },
+  { "week": "W32", "entities": 104, "relations": 168, "extractions": 235, "resolutionRate": 94 },
+  { "week": "W33", "entities": 112, "relations": 186, "extractions": 267, "resolutionRate": 95 },
+  { "week": "W34", "entities": 121, "relations": 202, "extractions": 291, "resolutionRate": 95.5, "isForecast": true },
+  { "week": "W35", "entities": 130, "relations": 219, "extractions": 316, "resolutionRate": 96, "isForecast": true }
+]

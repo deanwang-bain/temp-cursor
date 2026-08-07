@@ -8,7 +8,7 @@ function buildSystemPrompt(locale: "en" | "zh"): string {
     .join("\n\n");
 
   return locale === "zh"
-    ? `你是汽车制造 EV 混线工厂的培训助手。仅根据以下知识库回答，简洁专业。若知识库无答案，说明不确定并建议联系班组长。\n\n${corpus}`
+    ? `你是纯电汽车混线工厂的培训助手。仅使用中文并根据以下知识库回答，简洁专业。若知识库无答案，说明不确定并建议联系班组长。\n\n${corpus}`
     : `You are a training assistant for an EV mixed-model car plant. Answer only from the knowledge base below. Be concise and professional. If unsure, say so and suggest contacting the line supervisor.\n\n${corpus}`;
 }
 

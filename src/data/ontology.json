@@ -31,21 +31,21 @@
     "id": "nova-suv",
     "type": "model",
     "label": "Nova SUV",
-    "labelZh": "Nova SUV",
+    "labelZh": "星云纯电越野车",
     "relations": []
   },
   {
     "id": "pulse-sedan",
     "type": "model",
     "label": "Pulse Sedan",
-    "labelZh": "Pulse Sedan",
+    "labelZh": "脉冲纯电轿车",
     "relations": []
   },
   {
     "id": "spark-hatch",
     "type": "model",
     "label": "Spark Hatch",
-    "labelZh": "Spark Hatch",
+    "labelZh": "火花纯电两厢车",
     "relations": []
   },
   {
@@ -73,7 +73,7 @@
     "id": "ridge-cross",
     "type": "model",
     "label": "Ridge Cross",
-    "labelZh": "Ridge Cross",
+    "labelZh": "山脊纯电跨界车",
     "relations": []
   }
 ]

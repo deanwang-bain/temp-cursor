@@ -59,7 +59,7 @@ vercel env add OPENAI_MODEL
 | Route | Purpose |
 |-------|---------|
 | `/` | E2E cover — 4 advantages, clickable pipeline, platform layer reveal |
-| `/market` … `/knowledge` | Six operational modules |
+| `/market` … `/quality` | Five operational modules; Knowledge & Chat is a global callout |
 | `/ontology` | Semantic layer — raw → canonical entity graph |
 | `/agents` | Agent orchestration (“HR for agents”) |
 | `/ops` | Compute, tokens, cost, human review, alarms |
@@ -69,11 +69,12 @@ All module data is static JSON under `src/data/` — no external database requir
 ## Demo flow (recommended)
 
 1. Start on **`/`** — walk through the four platform advantages and the E2E pipeline.
-2. Click into **Market**, **Planning**, etc. — highlight **无感 AI**: AI-set badges inline, no separate “AI app.”
+2. Click into **Market**, **Planning**, etc. — highlight **无感 AI**: AI-set badges inline, visual history, and no separate “AI app.”
 3. **Double-click the hero logo** (or click **View platform layer**) to reveal Ontology / Agents / Ops.
 4. Show **`/ontology`** — unstructured news → extractions → canonical graph.
 5. Show **`/agents`** — ML vs LLM agents, shadow/retired lifecycle, team groupings.
 6. Show **`/ops`** — GPU util, token cost, pending human reviews, open alarms.
+7. Open **Knowledge & Chat** from any page using the floating callout.
 
 The header **status dot** (green/amber/red) gives ambient ops awareness without leaving the current module.
 

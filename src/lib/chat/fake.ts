@@ -32,7 +32,7 @@ function findAnswer(query: string, locale: "en" | "zh"): { answer: string; sourc
   return {
     answer:
       locale === "zh"
-        ? "我是培训助手（演示模式）。请询问换型、OEE、供应商、质量或需求计划相关问题。"
+        ? "我是培训助手（演示模式）。请询问换型、综合设备效率、供应商、质量或需求计划相关问题。"
         : "I am the training assistant (demo mode). Ask about changeover, OEE, suppliers, quality, or demand planning.",
   };
 }

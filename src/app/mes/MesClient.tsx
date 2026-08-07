@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { PageHeader } from "@/components/BrandLogo";
 import { Badge, Card, MetricCard } from "@/components/ui";
+import { BarChart, LineChart } from "@/components/charts";
+import { DimensionDrilldown } from "@/components/DimensionDrilldown";
 import { useI18n } from "@/lib/i18n/context";
 import type { EVModel, MesMetrics, MesStation } from "@/lib/types";
 
-type HistoryRow = { date: string; oee: number; ftt: number; vph: number; units: number };
+type HistoryRow = { date: string; oee: number; ftt: number; vph: number; units: number; isForecast?: boolean };
 
 export function MesClient({
   initialMetrics,
@@ -27,6 +29,12 @@ export function MesClient({
 
   const modelName = models.find((m) => m.id === metrics.currentModelId);
   const displayModel = modelName ? (locale === "zh" ? modelName.nameZh : modelName.name) : metrics.currentModelId;
+  const forecastStart = Math.max(0, history.findIndex((point) => point.isForecast) - 1);
+  const stationName = (id: string) => {
+    const station = stations.find((item) => item.id === id);
+    return station ? (locale === "zh" ? station.nameZh : station.name) : id;
+  };
+  const statusLabel = (status: MesStation["status"]) => locale === "zh" ? ({ running: "运行", idle: "空闲", alarm: "报警" }[status]) : status;
 
   const tick = useCallback(() => {
     setMetrics((m) => {
@@ -57,7 +65,7 @@ export function MesClient({
   };
 
   const exportReport = () => {
-    setReportMsg(locale === "zh" ? "报表已生成（演示）：mes-report-7d.pdf" : "Report generated (demo): mes-report-7d.pdf");
+    setReportMsg(locale === "zh" ? "报表已生成（演示）：制造执行七日报表.pdf" : "Report generated (demo): mes-report-7d.pdf");
   };
 
   return (
@@ -68,7 +76,7 @@ export function MesClient({
       />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCard label={t.mes.oee} value={`${metrics.oee}%`} sub={`A ${metrics.availability}% · P ${metrics.performance}% · Q ${metrics.quality}%`} alert={metrics.oee < 78} />
+        <MetricCard label={t.mes.oee} value={`${metrics.oee}%`} sub={locale === "zh" ? `可用率 ${metrics.availability}% · 性能率 ${metrics.performance}% · 质量率 ${metrics.quality}%` : `A ${metrics.availability}% · P ${metrics.performance}% · Q ${metrics.quality}%`} alert={metrics.oee < 78} />
         <MetricCard label={t.mes.ftt} value={`${metrics.ftt}%`} />
         <MetricCard label={t.mes.vph} value={metrics.vph} sub={`${t.mes.target}: ${metrics.targetVph}`} alert={metrics.vph < metrics.targetVph} />
         <MetricCard label={t.mes.unitsToday} value={metrics.unitsToday} />
@@ -95,29 +103,69 @@ export function MesClient({
       </Card>
 
       <Card title={t.mes.stations}>
+        <div className="mb-5">
+          <BarChart
+            labels={stations.map((s) => s.id.replace("st-", "ST"))}
+            series={[
+              { label: locale === "zh" ? "节拍（秒）" : "Cycle time (sec)", values: stations.map((s) => s.cycleSec), color: "#3370ff" },
+              { label: locale === "zh" ? "缺陷 × 20" : "Defects × 20", values: stations.map((s) => s.defects * 20), color: "#ef4444" },
+            ]}
+          />
+        </div>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {stations.map((s) => (
             <div key={s.id} className={`rounded border p-3 text-sm ${s.status === "alarm" ? "border-amber-400 bg-amber-50" : "border-zinc-200"}`}>
               <div className="flex items-center justify-between">
                 <span className="font-medium">{locale === "zh" ? s.nameZh : s.name}</span>
-                <Badge tone={s.status === "alarm" ? "warn" : s.status === "running" ? "success" : "default"}>{s.status}</Badge>
+                <Badge tone={s.status === "alarm" ? "warn" : s.status === "running" ? "success" : "default"}>{statusLabel(s.status)}</Badge>
               </div>
-              <div className="mt-1 text-xs text-zinc-500">Cycle {s.cycleSec}s · Defects {s.defects}</div>
+              <div className="mt-1 text-xs text-zinc-500">{locale === "zh" ? "节拍" : "Cycle"} {s.cycleSec}{locale === "zh" ? "秒" : "s"} · {locale === "zh" ? "缺陷" : "Defects"} {s.defects}</div>
             </div>
           ))}
         </div>
       </Card>
 
+      <Card title={locale === "zh" ? "车间多维分析" : "Shop-floor dimensional analysis"}>
+        <DimensionDrilldown
+          key={locale}
+          locale={locale}
+          rows={stations.map((station) => ({ status: station.status, station: station.id, defects: station.defects }))}
+          dimensions={[
+            { key: "status", label: locale === "zh" ? "运行状态" : "Operating status", valueLabel: (value) => statusLabel(value as MesStation["status"]) },
+            { key: "station", label: locale === "zh" ? "工位" : "Station", valueLabel: stationName },
+          ]}
+          measureKey="defects"
+          measureLabel={locale === "zh" ? "缺陷数" : "Defect count"}
+        />
+      </Card>
+
       <Card title={t.mes.history}>
+        <LineChart
+          labels={history.map((h) => h.date.slice(5))}
+          series={[
+            { label: t.mes.oee, values: history.map((h) => h.oee), color: "#3370ff", forecastFromIndex: forecastStart },
+            { label: t.mes.ftt, values: history.map((h) => h.ftt), color: "#14b8a6", forecastFromIndex: forecastStart },
+          ]}
+          valueSuffix="%"
+          forecastLabel={locale === "zh" ? "预测" : "Forecast"}
+        />
+        <div className="my-4 border-t border-[var(--border-light)]" />
+        <LineChart
+          labels={history.map((h) => h.date.slice(5))}
+          series={[
+            { label: t.mes.vph, values: history.map((h) => h.vph), color: "#8b5cf6", forecastFromIndex: forecastStart },
+          ]}
+          forecastLabel={locale === "zh" ? "预测" : "Forecast"}
+        />
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b text-left text-xs uppercase text-zinc-500">
-                <th className="py-2">Date</th>
-                <th>OEE</th>
-                <th>FTT</th>
-                <th>VPH</th>
-                <th>Units</th>
+                <th className="py-2">{locale === "zh" ? "日期" : "Date"}</th>
+                <th>{t.mes.oee}</th>
+                <th>{t.mes.ftt}</th>
+                <th>{t.mes.vph}</th>
+                <th>{locale === "zh" ? "产量" : "Units"}</th>
               </tr>
             </thead>
             <tbody>
@@ -127,7 +175,7 @@ export function MesClient({
                   <td>{h.oee}%</td>
                   <td>{h.ftt}%</td>
                   <td>{h.vph}</td>
-                  <td>{h.units}</td>
+                  <td>{h.units} {h.isForecast && <Badge tone="primary">{locale === "zh" ? "预测" : "Forecast"}</Badge>}</td>
                 </tr>
               ))}
             </tbody>

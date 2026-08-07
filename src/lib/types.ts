@@ -65,6 +65,7 @@ export type DemandForecast = {
   confidence?: number;
   aiRationale?: string;
   aiRationaleZh?: string;
+  isForecast?: boolean;
 };
 
 export type MarketingMessage = {
@@ -72,6 +73,7 @@ export type MarketingMessage = {
   triggerNewsId: string;
   modelId: string;
   channel: string;
+  channelZh?: string;
   message: string;
   messageZh: string;
   status: "draft" | "approved" | "live";
@@ -91,6 +93,30 @@ export type ProductionSlot = {
   staffRequired: number;
   note?: string;
   noteZh?: string;
+};
+
+export type ProductionHistoryPoint = {
+  week: string;
+  plannedUnits: number;
+  actualUnits: number;
+  utilization: number;
+  changeoverMin: number;
+  isForecast?: boolean;
+};
+
+export type PersonnelRolePlan = {
+  id: string;
+  role: string;
+  roleZh: string;
+  area: string;
+  areaZh: string;
+  shift: "A" | "B" | "C";
+  requiredHeadcount: number;
+  assignedHeadcount: number;
+  skills: string[];
+  skillsZh: string[];
+  qualifications: string[];
+  qualificationsZh: string[];
 };
 
 export type Holiday = {
@@ -113,6 +139,15 @@ export type Supplier = {
   flagReason: string;
   flagReasonZh: string;
   parts: string[];
+  partsZh?: string[];
+};
+
+export type SupplierHistoryPoint = {
+  month: string;
+  supplierId: string;
+  otif: number;
+  issues: number;
+  isForecast?: boolean;
 };
 
 export type MesMetrics = {
@@ -153,6 +188,25 @@ export type QualityIssue = {
   supplierId?: string;
   correctiveAction?: string;
   correctiveActionZh?: string;
+};
+
+export type QualityHistoryPoint = {
+  week: string;
+  minor: number;
+  major: number;
+  critical: number;
+  closed: number;
+  avgClosureHours: number;
+  isForecast?: boolean;
+};
+
+export type OntologyHistoryPoint = {
+  week: string;
+  entities: number;
+  relations: number;
+  extractions: number;
+  resolutionRate: number;
+  isForecast?: boolean;
 };
 
 export type KnowledgeArticle = {
@@ -266,4 +320,5 @@ export type OpsHistoryPoint = {
   tokenCostUsd: number;
   humanOverrides: number;
   alarmCount: number;
+  isForecast?: boolean;
 };

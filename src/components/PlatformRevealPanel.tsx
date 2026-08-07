@@ -5,7 +5,7 @@ import { useI18n } from "@/lib/i18n/context";
 import type { PlatformStats } from "@/lib/platform-stats";
 
 export function PlatformRevealPanel({ stats }: { stats: PlatformStats }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   const cards = [
     {
@@ -24,7 +24,7 @@ export function PlatformRevealPanel({ stats }: { stats: PlatformStats }) {
       href: "/ops",
       title: t.nav.ops,
       desc: t.platform.opsBlurb,
-      stat: `$${stats.todayCostUsd.toFixed(2)} ${t.ops.today} · ${stats.openAlarms} ${t.ops.openAlarms}`,
+      stat: `${locale === "zh" ? `${stats.todayCostUsd.toFixed(2)}美元` : `$${stats.todayCostUsd.toFixed(2)}`} ${t.ops.today} · ${stats.openAlarms} ${t.ops.openAlarms}`,
     },
   ];
 

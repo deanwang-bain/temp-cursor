@@ -4,7 +4,7 @@
     "at": "2026-08-07T11:18:00Z",
     "module": "market",
     "message": "News news-005 ingested → ontology updated → Spark demand +12%",
-    "messageZh": "新闻 news-005 入库 → 本体更新 → Spark 需求 +12%",
+    "messageZh": "新闻005入库 → 本体更新 → 火花车型需求增长12%",
     "agentId": "agent-orchestrator-market",
     "humanReviewed": false
   },
@@ -22,7 +22,7 @@
     "at": "2026-08-07T11:19:30Z",
     "module": "suppliers",
     "message": "Supplier sup-inverter flagged — quantity pattern matched",
-    "messageZh": "供应商 sup-inverter 标记 — 数量模式命中",
+    "messageZh": "逆变器供应商已标记 — 数量模式命中",
     "agentId": "agent-supplier-risk",
     "humanReviewed": true
   },
@@ -31,7 +31,7 @@
     "at": "2026-08-07T11:20:00Z",
     "module": "mes",
     "message": "MES heartbeat — OEE 78.4%, VPH 27.6, st-50 alarm",
-    "messageZh": "MES 心跳 — OEE 78.4%，VPH 27.6，st-50 报警",
+    "messageZh": "制造执行心跳 — 综合设备效率78.4%，每小时产量27.6，五十号工位报警",
     "humanReviewed": false
   },
   {
@@ -39,7 +39,7 @@
     "at": "2026-08-07T11:20:15Z",
     "module": "quality",
     "message": "QI-101 linked to supplier sup-inverter in TQM",
-    "messageZh": "QI-101 已在 TQM 关联供应商 sup-inverter",
+    "messageZh": "质量问题101已在全面质量管理中关联逆变器供应商",
     "agentId": "agent-root-cause-analyst",
     "humanReviewed": true
   }

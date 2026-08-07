@@ -15,7 +15,6 @@ const STEPS = [
   { href: "/suppliers", icon: "🏭", navKey: "suppliers" as const, descKey: "descSuppliers" as const, step: 3, parallel: true },
   { href: "/mes", icon: "⚙️", navKey: "mes" as const, descKey: "descMes" as const, step: 4 },
   { href: "/quality", icon: "✅", navKey: "quality" as const, descKey: "descQuality" as const, step: 5 },
-  { href: "/knowledge", icon: "💬", navKey: "knowledge" as const, descKey: "descKnowledge" as const, step: 6 },
 ];
 
 const ADVANTAGES = [
@@ -31,7 +30,8 @@ export function HomeClient({ events, stats }: { events: PipelineEvent[]; stats: 
 
   const market = STEPS[0];
   const parallel = STEPS.filter((s) => s.parallel);
-  const downstream = STEPS.filter((s) => !s.parallel && s.step > 1);
+  const mes = STEPS.find((s) => s.step === 4)!;
+  const quality = STEPS.find((s) => s.step === 5)!;
 
   const handleHeroReveal = () => reveal();
 
@@ -50,7 +50,7 @@ export function HomeClient({ events, stats }: { events: PipelineEvent[]; stats: 
             <span className="badge badge-blue">
               {STEPS.length} {t.home.modules}
             </span>
-            <span className="badge badge-green">E2E</span>
+            <span className="badge badge-green">{locale === "zh" ? "端到端" : "E2E"}</span>
             <span className="badge badge-amber">{t.home.triggerNote}</span>
           </div>
           <button type="button" className="cover-platform-toggle" onClick={handleHeroReveal}>
@@ -132,23 +132,26 @@ export function HomeClient({ events, stats }: { events: PipelineEvent[]; stats: 
 
           <div className="cover-flow-connector" aria-hidden />
 
-          <div className="cover-flow-row cover-flow-downstream">
-            {downstream.map((step, i) => (
-              <div key={step.href} className="cover-downstream-item">
-                {i > 0 && <span className="cover-flow-connector-h" aria-hidden />}
-                <Link href={step.href} className="cover-step cover-step-compact">
-                  <span className="cover-step-num">
-                    {t.home.stepLabel} {step.step}
-                  </span>
-                  <span className="cover-step-icon" aria-hidden>
-                    {step.icon}
-                  </span>
-                  <span className="cover-step-title">{t.nav[step.navKey]}</span>
-                  <span className="cover-step-desc">{t.home[step.descKey]}</span>
-                  <span className="cover-step-action">{t.home.enterApp} →</span>
-                </Link>
-              </div>
-            ))}
+          <div className="cover-flow-row">
+            <Link href={mes.href} className="cover-step cover-step-primary">
+              <span className="cover-step-num">{t.home.stepLabel} {mes.step}</span>
+              <span className="cover-step-icon" aria-hidden>{mes.icon}</span>
+              <span className="cover-step-title">{t.nav[mes.navKey]}</span>
+              <span className="cover-step-desc">{t.home[mes.descKey]}</span>
+              <span className="cover-step-action">{t.home.enterApp} →</span>
+            </Link>
+          </div>
+
+          <div className="cover-flow-connector" aria-hidden />
+
+          <div className="cover-flow-row">
+            <Link href={quality.href} className="cover-step cover-step-primary">
+              <span className="cover-step-num">{t.home.stepLabel} {quality.step}</span>
+              <span className="cover-step-icon" aria-hidden>{quality.icon}</span>
+              <span className="cover-step-title">{t.nav[quality.navKey]}</span>
+              <span className="cover-step-desc">{t.home[quality.descKey]}</span>
+              <span className="cover-step-action">{t.home.enterApp} →</span>
+            </Link>
           </div>
         </div>
       </Card>
@@ -174,7 +177,7 @@ export function HomeClient({ events, stats }: { events: PipelineEvent[]; stats: 
           {events.map((e) => (
             <li key={e.id}>
               <span className="pipeline-time">{new Date(e.at).toLocaleTimeString()}</span>
-              <span className="badge badge-blue">{e.module}</span>
+              <span className="badge badge-blue">{locale === "zh" && e.module in t.nav ? t.nav[e.module as keyof typeof t.nav] : e.module}</span>
               {e.agentId && <span className="badge badge-green">{e.agentId}</span>}
               <span className="pipeline-detail">{locale === "zh" ? e.messageZh : e.message}</span>
             </li>

@@ -1,6 +1,5 @@
-import { KnowledgeClient } from "./KnowledgeClient";
-import { getKnowledge } from "@/lib/data";
+import { redirect } from "next/navigation";
 
 export default function KnowledgePage() {
-  return <KnowledgeClient articles={getKnowledge()} />;
+  redirect("/");
 }

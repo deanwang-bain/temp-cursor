@@ -1,6 +1,6 @@
 import { SuppliersClient } from "./SuppliersClient";
-import { getSuppliers } from "@/lib/data";
+import { getSupplierHistory, getSuppliers } from "@/lib/data";
 
 export default function SuppliersPage() {
-  return <SuppliersClient suppliers={getSuppliers()} />;
+  return <SuppliersClient suppliers={getSuppliers()} history={getSupplierHistory()} />;
 }

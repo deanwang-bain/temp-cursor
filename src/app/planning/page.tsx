@@ -1,5 +1,5 @@
 import { PlanningClient } from "./PlanningClient";
-import { getHolidays, getModels, getProductionPlan } from "@/lib/data";
+import { getHolidays, getModels, getPersonnelPlan, getProductionHistory, getProductionPlan } from "@/lib/data";
 
 export default function PlanningPage() {
   return (
@@ -7,6 +7,8 @@ export default function PlanningPage() {
       plan={getProductionPlan()}
       holidays={getHolidays()}
       models={getModels()}
+      history={getProductionHistory()}
+      personnel={getPersonnelPlan()}
     />
   );
 }

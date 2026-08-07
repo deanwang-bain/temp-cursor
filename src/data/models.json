@@ -2,16 +2,16 @@
   {
     "id": "nova-suv",
     "name": "Nova SUV",
-    "nameZh": "Nova 纯电SUV",
+    "nameZh": "星云纯电越野车",
     "segment": "Mid-size SUV",
-    "segmentZh": "中型SUV",
+    "segmentZh": "中型运动型多用途车",
     "baseCycleMin": 2.1,
     "changeoverMin": 28
   },
   {
     "id": "pulse-sedan",
     "name": "Pulse Sedan",
-    "nameZh": "Pulse 纯电轿车",
+    "nameZh": "脉冲纯电轿车",
     "segment": "Compact sedan",
     "segmentZh": "紧凑轿车",
     "baseCycleMin": 1.9,
@@ -20,7 +20,7 @@
   {
     "id": "spark-hatch",
     "name": "Spark Hatch",
-    "nameZh": "Spark 纯电两厢",
+    "nameZh": "火花纯电两厢车",
     "segment": "City hatchback",
     "segmentZh": "城市两厢",
     "baseCycleMin": 1.7,
@@ -29,7 +29,7 @@
   {
     "id": "ridge-cross",
     "name": "Ridge Cross",
-    "nameZh": "Ridge 跨界版",
+    "nameZh": "山脊纯电跨界车",
     "segment": "Crossover",
     "segmentZh": "跨界车",
     "baseCycleMin": 2.0,
@@ -38,7 +38,7 @@
   {
     "id": "apex-coupe",
     "name": "Apex Coupe",
-    "nameZh": "Apex 运动版",
+    "nameZh": "巅峰纯电跑车",
     "segment": "Performance coupe",
     "segmentZh": "性能轿跑",
     "baseCycleMin": 2.3,

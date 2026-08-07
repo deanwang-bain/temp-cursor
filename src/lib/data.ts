@@ -8,12 +8,17 @@ import ontology from "@/data/ontology.json";
 import demand from "@/data/demand.json";
 import marketing from "@/data/marketing.json";
 import productionPlan from "@/data/production-plan.json";
+import productionHistory from "@/data/production-history.json";
+import personnelPlan from "@/data/personnel-plan.json";
 import holidays from "@/data/holidays.json";
 import suppliers from "@/data/suppliers.json";
+import supplierHistory from "@/data/supplier-history.json";
 import mesMetrics from "@/data/mes-metrics.json";
 import mesStations from "@/data/mes-stations.json";
 import mesHistory from "@/data/mes-history.json";
 import qualityIssues from "@/data/quality-issues.json";
+import qualityHistory from "@/data/quality-history.json";
+import ontologyHistory from "@/data/ontology-history.json";
 import knowledge from "@/data/knowledge.json";
 import pipelineEvents from "@/data/pipeline-events.json";
 import type {
@@ -30,10 +35,15 @@ import type {
   OntologyExtraction,
   OpsHistoryPoint,
   OpsMetrics,
+  OntologyHistoryPoint,
   PipelineEvent,
   ProductionSlot,
+  ProductionHistoryPoint,
+  PersonnelRolePlan,
   QualityIssue,
+  QualityHistoryPoint,
   Supplier,
+  SupplierHistoryPoint,
 } from "@/lib/types";
 
 export function getModels(): EVModel[] {
@@ -60,12 +70,24 @@ export function getProductionPlan(): ProductionSlot[] {
   return productionPlan as ProductionSlot[];
 }
 
+export function getProductionHistory(): ProductionHistoryPoint[] {
+  return productionHistory as ProductionHistoryPoint[];
+}
+
+export function getPersonnelPlan(): PersonnelRolePlan[] {
+  return personnelPlan as PersonnelRolePlan[];
+}
+
 export function getHolidays(): Holiday[] {
   return holidays as Holiday[];
 }
 
 export function getSuppliers(): Supplier[] {
   return suppliers as Supplier[];
+}
+
+export function getSupplierHistory(): SupplierHistoryPoint[] {
+  return supplierHistory as SupplierHistoryPoint[];
 }
 
 export function getMesMetrics(): MesMetrics {
@@ -77,11 +99,15 @@ export function getMesStations(): MesStation[] {
 }
 
 export function getMesHistory() {
-  return mesHistory as { date: string; oee: number; ftt: number; vph: number; units: number }[];
+  return mesHistory as { date: string; oee: number; ftt: number; vph: number; units: number; isForecast?: boolean }[];
 }
 
 export function getQualityIssues(): QualityIssue[] {
   return qualityIssues as QualityIssue[];
+}
+
+export function getQualityHistory(): QualityHistoryPoint[] {
+  return qualityHistory as QualityHistoryPoint[];
 }
 
 export function getKnowledge(): KnowledgeArticle[] {
@@ -110,6 +136,10 @@ export function getOpsHistory(): OpsHistoryPoint[] {
 
 export function getOntologySources(): OntologyExtraction[] {
   return ontologySources as OntologyExtraction[];
+}
+
+export function getOntologyHistory(): OntologyHistoryPoint[] {
+  return ontologyHistory as OntologyHistoryPoint[];
 }
 
 export function getPlatformStats() {

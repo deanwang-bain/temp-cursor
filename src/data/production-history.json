@@ -1,0 +1,11 @@
+[
+  { "week": "W27", "plannedUnits": 2440, "actualUnits": 2318, "utilization": 76, "changeoverMin": 164 },
+  { "week": "W28", "plannedUnits": 2510, "actualUnits": 2426, "utilization": 80, "changeoverMin": 151 },
+  { "week": "W29", "plannedUnits": 2475, "actualUnits": 2392, "utilization": 79, "changeoverMin": 173 },
+  { "week": "W30", "plannedUnits": 2580, "actualUnits": 2508, "utilization": 83, "changeoverMin": 146 },
+  { "week": "W31", "plannedUnits": 2635, "actualUnits": 2572, "utilization": 85, "changeoverMin": 139 },
+  { "week": "W32", "plannedUnits": 2670, "actualUnits": 2601, "utilization": 86, "changeoverMin": 143 },
+  { "week": "W33", "plannedUnits": 2784, "actualUnits": 2688, "utilization": 89, "changeoverMin": 132 },
+  { "week": "W34", "plannedUnits": 2840, "actualUnits": 2765, "utilization": 91, "changeoverMin": 128, "isForecast": true },
+  { "week": "W35", "plannedUnits": 2895, "actualUnits": 2822, "utilization": 92, "changeoverMin": 124, "isForecast": true }
+]

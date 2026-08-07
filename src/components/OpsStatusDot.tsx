@@ -6,7 +6,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { getOpsMetrics } from "@/lib/data";
 
 export function OpsStatusDot() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
   const ops = getOpsMetrics();
   const openAlarms = ops.alarms.filter((a) => !a.resolvedAt);
@@ -32,7 +32,7 @@ export function OpsStatusDot() {
               {ops.humanInTheLoop.pendingReviews} {t.ops.pendingReviews}
             </li>
             <li>
-              ${ops.tokenUsage.todayCostUsd.toFixed(2)} {t.ops.tokensToday}
+              {locale === "zh" ? `${ops.tokenUsage.todayCostUsd.toFixed(2)}美元` : `$${ops.tokenUsage.todayCostUsd.toFixed(2)}`} {t.ops.tokensToday}
             </li>
             <li>
               {openAlarms.length} {t.ops.openAlarms}

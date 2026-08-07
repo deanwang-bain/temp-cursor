@@ -1,0 +1,12 @@
+[
+  { "week": "W26", "minor": 12, "major": 6, "critical": 1, "closed": 15, "avgClosureHours": 28 },
+  { "week": "W27", "minor": 14, "major": 5, "critical": 2, "closed": 17, "avgClosureHours": 31 },
+  { "week": "W28", "minor": 11, "major": 7, "critical": 1, "closed": 16, "avgClosureHours": 27 },
+  { "week": "W29", "minor": 10, "major": 6, "critical": 1, "closed": 15, "avgClosureHours": 24 },
+  { "week": "W30", "minor": 9, "major": 5, "critical": 2, "closed": 13, "avgClosureHours": 26 },
+  { "week": "W31", "minor": 8, "major": 5, "critical": 1, "closed": 12, "avgClosureHours": 22 },
+  { "week": "W32", "minor": 7, "major": 4, "critical": 1, "closed": 10, "avgClosureHours": 20 },
+  { "week": "W33", "minor": 2, "major": 1, "critical": 1, "closed": 1, "avgClosureHours": 18 },
+  { "week": "W34", "minor": 6, "major": 3, "critical": 1, "closed": 8, "avgClosureHours": 17, "isForecast": true },
+  { "week": "W35", "minor": 5, "major": 3, "critical": 0, "closed": 7, "avgClosureHours": 16, "isForecast": true }
+]
